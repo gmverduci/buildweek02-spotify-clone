@@ -132,10 +132,10 @@ const loadRandomArtists = async () => {
 const createArtistCard = (artist) => {
     const card = document.createElement("div");
     card.className = "card col-2 mx-1 mb-4";
-    card.setAttribute('style','width: 9rem')
+    card.setAttribute('style','width: 15rem')
   
     const image = document.createElement("img");
-    image.src = artist.picture_medium;
+    image.src = artist.picture_big   ;
     image.className = "card-img-top mt-3"
   
    
@@ -162,10 +162,10 @@ const createArtistCard = (artist) => {
 const createAlbumCard = (album,artist ) => {
     const card = document.createElement("div");
     card.className = "card col-2 mx-1 mb-4";
-    card.setAttribute('style','width: 9 rem')
+    card.setAttribute('style','width: 15 rem')
   
     const image = document.createElement("img");
-    image.src = album.album.cover_medium;
+    image.src = album.album.cover_xl;
     image.className = "card-img-top mt-3"
   
     const cardBody = document.createElement('div');
@@ -256,13 +256,13 @@ const loadRandomAlbums = async (artistId) => {
 
   const cardTracks = (album, artist) => {
     const card = document.createElement("div");
-    card.className = "card col-2 mx-1 mb-4";
-    card.setAttribute('style', 'width: 9rem');
+    card.className = "card col-2 mx-1 mb-4 text-center cardColor ";
+    card.setAttribute('style', 'width: 15rem');
   
   
       const image = document.createElement("img");
-      image.className = "card-img-top mt-3";
-      image.src = album.cover_medium;
+      image.className = "card-img-top mt-3 rounded-circle";
+      image.src = album.cover_xl;
       card.appendChild(image);
   
     const cardBody = document.createElement('div');
@@ -270,13 +270,13 @@ const loadRandomAlbums = async (artistId) => {
   
   
       const name = document.createElement("h5");
-      name.className = "card-title";
+      name.className = "card-title overfooter ";
       name.innerText = album.title;
       cardBody.appendChild(name);
     
 
       const text = document.createElement('p');
-      text.className = "card-text";
+      text.className = "card-text text-danger fw-bold";
       text.innerText = artist.name;
       cardBody.appendChild(text);
 
@@ -285,6 +285,7 @@ const loadRandomAlbums = async (artistId) => {
   
     return card;
   }
+
   
 
 
