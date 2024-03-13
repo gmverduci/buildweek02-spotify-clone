@@ -26,14 +26,17 @@ const init = async () => {
   try {
     await loadRandomArtists();
     const cachedArtists = JSON.parse(localStorage.getItem(artistsCache));
-    for (const artist of cachedArtists) {
-      await loadRandomAlbums(artist.id);
-    }
-    const cachedAlbums = JSON.parse(localStorage.getItem(albumCache));
+    let allAlbums = [];
+    let allTracks = [];
     for (const artist of cachedArtists) {
       const artistId = artist.id;
-      await loadRandomTracks(artistId);
+      const albums = await loadRandomAlbums(artistId);
+      allAlbums = allAlbums.concat(albums);
+      const tracks = await loadRandomTracks(artistId);
+      allTracks = allTracks.concat(tracks);
     }
+    localStorage.setItem(albumCache, JSON.stringify(allAlbums));
+    localStorage.setItem(tracksCache, JSON.stringify(allTracks));
   } catch (error) {
     console.error("Initialization error", error);
   }
@@ -47,7 +50,7 @@ const fetchRandomArtist = async () => {
 
   const randomArtist = artists[Math.floor(Math.random() * artists.length)];
   try {
-    await delay(150);
+    await delay(0);
 
     const response = await fetch(`${artistApi}${randomArtist}`, {
       method: "GET",
@@ -97,95 +100,67 @@ const loadRandomArtists = async () => {
 };
 
 const loadRandomAlbums = async (artistId) => {
-  let fetchedAlbums = [];
-  try {
-    await delay(150); // Wait for 1 second before making the request
-
-    const response = await fetch(`${searchApi}${artistId}`, {
-      method: "GET",
-    });
-    if (!response.ok) {
-      console.error(`Error fetching albums: ${response.statusText}`);
-      return;
-    }
-    const contentType = response.headers.get("content-type");
-    if (!contentType || !contentType.includes("application/json")) {
-      console.error("Non-JSON response received");
-      return;
-    }
-    const data = await response.json();
-    if (data.data.length > 0) {
-      const album = data.data[0];
-      fetchedAlbums.push(album);
-      localStorage.setItem(albumCache, JSON.stringify(fetchedAlbums));
-      console.log("Stored albums in local storage:", fetchedAlbums);
-    } else {
-      console.error("No albums fetched successfully.");
-    }
-  } catch (error) {
-    console.error("Error fetching albums:", error);
-  }
-};
-
-const fetchRandomTracks = async (albumId) => {
-  console.log("Album ID in fetchRandomTracks:", albumId); // Debugging line
-  try {
-    await delay(150);
-
-    const response = await fetch(`${albumApi}${albumId}/tracks`, {
-      method: "GET",
-    });
-    if (!response.ok) {
-      console.error(`Error fetching tracks: ${response.statusText}`);
+    try {
+      await delay(0); 
+  
+      const response = await fetch(`${searchApi}${artistId}`, {
+        method: "GET",
+      });
+      if (!response.ok) {
+        console.error(`Error fetching albums: ${response.statusText}`);
+        return null;
+      }
+      const contentType = response.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        console.error("Non-JSON response received");
+        return null;
+      }
+      const data = await response.json();
+      if (data.data.length > 0) {
+        const randomIndex = Math.floor(Math.random() * data.data.length);
+        const album = data.data[randomIndex]; 
+        console.log("Fetched album:", album);
+        return album;
+      } else {
+        console.error("No albums fetched successfully.");
+        return null;
+      }
+    } catch (error) {
+      console.error("Error fetching albums:", error);
       return null;
     }
-    const contentType = response.headers.get("content-type");
-    if (!contentType || !contentType.includes("application/json")) {
-      console.error("Non-JSON response received");
+  };
+
+  const loadRandomTracks = async (artistId) => {
+    try {
+      await delay(0);
+  
+      const response = await fetch(`${trackApi}${artistId}/top?limit=10`, {
+        method: "GET",
+      });
+      if (!response.ok) {
+        console.error(`Error fetching tracks: ${response.statusText}`);
+        return null;
+      }
+      const contentType = response.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        console.error("Non-JSON response received");
+        return null;
+      }
+      const data = await response.json();
+      if (data.data.length > 0) {
+        const randomIndex = Math.floor(Math.random() * data.data.length);
+        const track = data.data[randomIndex]; 
+        console.log("Fetched track:", track);
+        return track;
+      } else {
+        console.error("No tracks fetched successfully.");
+        return null;
+      }
+    } catch (error) {
+      console.error("Error fetching tracks:", error);
       return null;
     }
-    const data = await response.json();
-    if (data.data.length > 0) {
-      const randomTrackIndex = Math.floor(Math.random() * data.data.length);
-      return data.data[randomTrackIndex];
-    }
-  } catch (error) {
-    console.error("Error fetching tracks:", error);
-  }
-  return null;
-};
-
-const loadRandomTracks = async (artistId) => {
-  console.log("Album ID in loadRandomTracks:", artistId); // Debugging line
-  let fetchedTracks = [];
-  try {
-    await delay(150);
-
-    const response = await fetch(`${trackApi}${artistId}/top?limit=10`, {
-      method: "GET",
-    });
-    if (!response.ok) {
-      console.error(`Error fetching tracks: ${response.statusText}`);
-      return;
-    }
-    const contentType = response.headers.get("content-type");
-    if (!contentType || !contentType.includes("application/json")) {
-      console.error("Non-JSON response received");
-      return;
-    }
-    const data = await response.json();
-    if (data.data.length > 0) {
-      const randomTrackIndex = Math.floor(Math.random() * data.data.length);
-      const randomTrack = data.data[randomTrackIndex];
-      fetchedTracks.push(randomTrack);
-      localStorage.setItem(tracksCache, JSON.stringify(fetchedTracks));
-      console.log("Stored tracks in local storage:", fetchedTracks);
-    } else {
-      console.error("No tracks fetched successfully.");
-    }
-  } catch (error) {
-    console.error("Error fetching tracks:", error);
-  }
-};
+  };
 
 document.addEventListener("DOMContentLoaded", init);
