@@ -5,7 +5,7 @@ const trackApi = "https://striveschool-api.herokuapp.com/api/deezer/artist/";
 
 const albumApi = "https://corsproxy.io/?https://api.deezer.com/album/";
 const artistApi = "https://corsproxy.io/?https://api.deezer.com/artist/";
-const searchApi = "https://corsproxy.io/?https://api.deezer.com/search?q=";
+const searchApi = "https://striveschool-api.herokuapp.com/api/deezer/search?q=";
 const token =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVhZDUyMTJkN2IxMTAwMTkwZTZkY2IiLCJpYXQiOjE3MTAxNjg2MjcsImV4cCI6MTcxMTM3ODIyN30.Js9yWPVZ-_WVXu5nVOvuKTIW9yEyXbD3UJ5A-Deo6LA";
 
@@ -142,6 +142,9 @@ const createArtistCard = (artist) => {
   const name = document.createElement("h5");
   name.innerHTML = artist.name;
   name.className = "card-title";
+  name.addEventListener("click", () => {
+    window.location.href = `artist.html?artistId=${artist.id}`;
+  });
 
   const text = document.createElement("p");
   text.className = "card-text";
@@ -395,3 +398,5 @@ const createResultElement = (result) => {
 };
 
 document.addEventListener("DOMContentLoaded", init);
+
+
