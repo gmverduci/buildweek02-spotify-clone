@@ -111,11 +111,11 @@ const loadRandomArtists = async () => {
       .slice(0, 7);
 
     console.log(randomArtists);
-
-    const artistsContainer = document.getElementById("");
+    
+    const artistsContainer = document.getElementById("container-cards-artista");
     artistsContainer.innerHTML = "";
 
-    uniqueArtists.forEach((artist) => {
+    randomArtists.forEach((artist) => {
       const artistElement = createArtistCard(artist);
       artistsContainer.appendChild(artistElement);
     });
@@ -126,22 +126,31 @@ const loadRandomArtists = async () => {
 
 const createArtistCard = (artist) => {
   const card = document.createElement("div");
-  card.className = "";
+  card.className = "card col-2 mx-1 mb-4";
+  card.setAttribute('style','width: 9rem')
 
   const image = document.createElement("img");
   image.src = artist.picture_medium;
-  picture.alt = `Picture of ${artist.name}`;
-  picture.className = "";
+  image.className = "card-img-top mt-3"
 
-  const name = document.createElement("h3");
+ 
+  const cardBody = document.createElement('div');
+  cardBody.className = "card-body";
+
+  const name = document.createElement("h5");
   name.innerHTML = artist.name;
-  name.className = "";
+  name.className = "card-title";
+ 
+  const text = document.createElement('p');
+  text.className = "card-text";
+  text.innerText = "Artista"
 
   card.appendChild(image);
-  card.appendChild(name);
+  cardBody.append(name,text);
+  card.appendChild(cardBody);
+   
+  return card;
 
-  const artistsContainer = document.getElementById("");
-  artistsContainer.appendChild(card);
 };
 
 const fetchRandomAlbumsByArtist = async () => {
@@ -185,7 +194,7 @@ const loadRandomAlbums = async () => {
 
     console.log(randomAlbums);
 
-    const albumsContainer = document.getElementById("");
+    const albumsContainer = document.getElementById("container-cards-album");
     albumsContainer.innerHTML = "";
 
     randomAlbums.forEach((album) => {
@@ -199,24 +208,27 @@ const loadRandomAlbums = async () => {
 
 const createAlbumCard = (album) => {
   const card = document.createElement("div");
-  card.className = "";
+  card.className = "card col-2 mx-1 mb-4";
+  card.setAttribute('style','width: 9 rem')
 
   const coverImg = document.createElement("img");
-  coverImg.src = album.cover_medium;
-  coverImg.alt = `Cover of ${album.title}`;
-  coverImg.className = "";
+  coverImg.src = cover_medium;
+  coverImg.className = "card-img-top mt-3";
 
-  const title = document.createElement("h3");
+  const cardBody = document.createElement('div');
+  cardBody.className = "card-body";
+
+  const title = document.createElement("h5");
   title.textContent = album.title;
-  title.className = "";
+  title.className = "card-title";
 
   const artistName = document.createElement("p");
   artistName.textContent = album.artist.name;
-  artistName.className = "";
+  artistName.className = "card-text";
 
   card.appendChild(coverImg);
-  card.appendChild(title);
-  card.appendChild(artistName);
+  cardBody.append(title,artistName);
+  card.appendChild(cardBody);
 
   return card;
 };
