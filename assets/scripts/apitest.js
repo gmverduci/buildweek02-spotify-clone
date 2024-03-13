@@ -118,7 +118,7 @@ const loadRandomAlbums = async (artistId) => {
       const data = await response.json();
       if (data.data.length > 0) {
         const randomIndex = Math.floor(Math.random() * data.data.length);
-        const album = data.data[randomIndex]; // Ottieni casualmente un album dall'array
+        const album = data.data[randomIndex]; 
         console.log("Fetched album:", album);
         return album;
       } else {
@@ -150,7 +150,7 @@ const loadRandomAlbums = async (artistId) => {
       const data = await response.json();
       if (data.data.length > 0) {
         const randomIndex = Math.floor(Math.random() * data.data.length);
-        const track = data.data[randomIndex]; // Ottieni casualmente una traccia dall'array
+        const track = data.data[randomIndex]; 
         console.log("Fetched track:", track);
         return track;
       } else {
