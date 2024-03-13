@@ -270,13 +270,13 @@ const loadRandomAlbums = async (artistId) => {
   
   
       const name = document.createElement("h5");
-      name.className = "card-title overfooter textpur";
+      name.className = "card-title overfooter text-black";
       name.innerText = album.title;
       cardBody.appendChild(name);
     
 
       const text = document.createElement('p');
-      text.className = "card-text textbluu fw-bold";
+      text.className = "card-text  textbluu fw-bold";
       text.innerText = artist.name;
       cardBody.appendChild(text);
 

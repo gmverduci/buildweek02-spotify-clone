@@ -19,15 +19,15 @@ padding: 4px 10px;
 .overfooter:hover{
     scale: 1.3;
     opacity:1;
-    color: white;
+    color: white !important;
     
 }
 
 .cardColor{
     background: #082200;
-background: -moz-radial-gradient(center, #082200 0%, #000000 17%, #A2792E 100%);
-background: -webkit-radial-gradient(center, #082200 0%, #000000 17%, #A2792E 100%);
-background: radial-gradient(ellipse at center, #082200 0%, #000000 17%, #A2792E 100%);
+background: -moz-radial-gradient(center, #082200 0%, #000000 1%, #A2792E 100%);
+background: -webkit-radial-gradient(center, #082200 0%, #000000 1%, #A2792E 100%);
+background: radial-gradient(ellipse at center, #082200 0%, #000000 1%, #A2792E 100%);
 box-shadow: 0px 20px 25px 8px rgb(0,0,0,0.4);
 }
 .textbluu{
