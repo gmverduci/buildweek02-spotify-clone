@@ -236,4 +236,31 @@ const displayAlbumsDetails = (albums) => {
 
 document.addEventListener("DOMContentLoaded", () => {
   init();
+
+  const prevButton = document.getElementById("button-prev");
+  const nextButton = document.getElementById("button-next");
+
+  prevButton.addEventListener("click", () => {
+    changeArtist(-1);
+  });
+
+  nextButton.addEventListener("click", () => {
+    changeArtist(1);
+  });
 });
+
+const changeArtist = (increment) => {
+  const urlParams = new URLSearchParams(window.location.search);
+  let artistId = urlParams.get("artistId");
+
+  if (artistId) {
+    artistId = parseInt(artistId) + increment;
+    const newUrl =
+      window.location.origin +
+      window.location.pathname +
+      `?artistId=${artistId}`;
+    window.history.pushState({ path: newUrl }, "", newUrl);
+
+    init();
+  }
+};
