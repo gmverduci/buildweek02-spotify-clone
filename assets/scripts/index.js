@@ -1581,235 +1581,235 @@ const albumApi = "https://striveschool-api.herokuapp.com/api/deezer/album/";
 const artistApi = "https://striveschool-api.herokuapp.com/api/deezer/artist/";
 const searchApi = "https://striveschool-api.herokuapp.com/api/deezer/search?q=";
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVhZDUyMTJkN2IxMTAwMTkwZTZkY2IiLCJpYXQiOjE3MTAxNjg2MjcsImV4cCI6MTcxMTM3ODIyN30.Js9yWPVZ-_WVXu5nVOvuKTIW9yEyXbD3UJ5A-Deo6LA";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVhZDUyMTJkN2IxMTAwMTkwZTZkY2IiLCJpYXQiOjE3MTAxNjg2MjcsImV4cCI6MTcxMTM3ODIyN30.Js9yWPVZ-_WVXu5nVOvuKTIW9yEyXbD3UJ5A-Deo6LA";
 
 /* const genres = ['rock', 'pop', 'country', 'rap/hip hop', 'jazz', 'kids', 'indie', 'folk', 'electro', 'spirituality & religion', 'classical']; */
 const artists = [
-  "Eminem",
-  "Coldplay",
-  "Cascada",
-  "Radiohead",
-  "Adele",
-  "Daft-Punk",
-  "Drake",
-  "Rihanna",
-  "Linkin-Park",
-  "Sfera-Ebbasta",
-  "Kanye-West",
-  "Martin-Garrix",
-  "Alan-Walker",
-  "Gabry-Ponte",
-  "Dua-Lipa",
-  "Billie-Eilish",
-  "Avicii",
-  "Fall-Out-Boy",
-  "Taylor-Swift",
-  "Katy-Perry",
-  "Ed-Sheeran",
-  "The-Chainsmokers",
-  "Lady-Gaga",
-  "Nicki-Minaj",
-  "Bruno-Mars",
-  "Imagine-Dragons",
-  "David-Guetta",
-  "Justin-Bieber",
-  "Sia",
+    "Eminem",
+    "Coldplay",
+    "Cascada",
+    "Radiohead",
+    "Adele",
+    "Daft-Punk",
+    "Drake",
+    "Rihanna",
+    "Linkin-Park",
+    "Sfera-Ebbasta",
+    "Kanye-West",
+    "Martin-Garrix",
+    "Alan-Walker",
+    "Gabry-Ponte",
+    "Dua-Lipa",
+    "Billie-Eilish",
+    "Avicii",
+    "Fall-Out-Boy",
+    "Taylor-Swift",
+    "Katy-Perry",
+    "Ed-Sheeran",
+    "The-Chainsmokers",
+    "Lady-Gaga",
+    "Nicki-Minaj",
+    "Bruno-Mars",
+    "Imagine-Dragons",
+    "David-Guetta",
+    "Justin-Bieber",
+    "Sia",
 ];
 
 const altArtists = [
-  "Eminem",
-  "Coldplay",
-  "Cascada",
-  "Radiohead",
-  "Adele",
-  "Daft Punk",
-  "Drake",
-  "Rihanna",
-  "Linkin Park",
-  "Sfera Ebbasta",
-  "Kanye West",
-  "Martin Garrix",
-  "Alan Walker",
-  "Gabry Ponte",
-  "Dua Lipa",
-  "Billie Eilish",
-  "Avicii",
-  "Fall Out Boy",
-  "Taylor Swift",
-  "Katy Perry",
-  "Ed Sheeran",
-  "The Chainsmokers",
-  "Lady Gaga",
-  "Nicki Minaj",
-  "Bruno Mars",
-  "Imagine Dragons",
-  "David Guetta",
-  "Justin Bieber",
-  "Sia",
+    "Eminem",
+    "Coldplay",
+    "Cascada",
+    "Radiohead",
+    "Adele",
+    "Daft Punk",
+    "Drake",
+    "Rihanna",
+    "Linkin Park",
+    "Sfera Ebbasta",
+    "Kanye West",
+    "Martin Garrix",
+    "Alan Walker",
+    "Gabry Ponte",
+    "Dua Lipa",
+    "Billie Eilish",
+    "Avicii",
+    "Fall Out Boy",
+    "Taylor Swift",
+    "Katy Perry",
+    "Ed Sheeran",
+    "The Chainsmokers",
+    "Lady Gaga",
+    "Nicki Minaj",
+    "Bruno Mars",
+    "Imagine Dragons",
+    "David Guetta",
+    "Justin Bieber",
+    "Sia",
 ];
 
 document.addEventListener("DOMContentLoaded", async () => {
-  /* loadHomePage(); */
-  await loadRandomArtists();
-  await  loadRandomAlbums()
-  fetchRandomTracks();
+    /* loadHomePage(); */
+    await loadRandomArtists();
+    await loadRandomAlbums()
+    fetchRandomTracks();
 });
 
 const fetchRandomArtist = async () => {
-  const randomArtist = artists[Math.floor(Math.random() * artists.length)];
-  try {
-    const response = await fetch(`${artistApi}${randomArtist}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const artist = await response.json();
-    return artist;
-  } catch (error) {
-    console.error("Error fetching artists:", error);
-  }
+    const randomArtist = artists[Math.floor(Math.random() * artists.length)];
+    try {
+        const response = await fetch(`${artistApi}${randomArtist}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        const artist = await response.json();
+        return artist;
+    } catch (error) {
+        console.error("Error fetching artists:", error);
+    }
 };
 
 const loadRandomArtists = async () => {
-  try {
-    let fetchedArtists = [];
+    try {
+        let fetchedArtists = [];
 
-    for (let i = 0; i < artists.length; i++) {
-      const randomArtist = await fetchRandomArtist();
-      if (randomArtist && randomArtist.id) {
-        fetchedArtists.push(randomArtist);
-      }
+        for (let i = 0; i < artists.length; i++) {
+            const randomArtist = await fetchRandomArtist();
+            if (randomArtist && randomArtist.id) {
+                fetchedArtists.push(randomArtist);
+            }
+        }
+
+        const uniqueArtists = Array.from(
+            new Set(fetchedArtists.map((artist) => artist.id))
+        ).map((id) => fetchedArtists.find((artist) => artist.id === id));
+        const randomArtists = uniqueArtists
+            .sort(() => 0.5 - Math.random())
+            .slice(0, 7);
+
+        console.log(randomArtists);
+
+        const artistsContainer = document.getElementById("container-cards-artista");
+        artistsContainer.innerHTML = "";
+
+        randomArtists.forEach((artist) => {
+            const artistElement = createArtistCard(artist);
+            artistsContainer.appendChild(artistElement);
+        });
+    } catch (error) {
+        console.error("Error loading artists:", error);
     }
-
-    const uniqueArtists = Array.from(
-      new Set(fetchedArtists.map((artist) => artist.id))
-    ).map((id) => fetchedArtists.find((artist) => artist.id === id));
-    const randomArtists = uniqueArtists
-      .sort(() => 0.5 - Math.random())
-      .slice(0, 7);
-
-    console.log(randomArtists);
-    
-    const artistsContainer = document.getElementById("container-cards-artista");
-    artistsContainer.innerHTML = "";
-
-    randomArtists.forEach((artist) => {
-      const artistElement = createArtistCard(artist);
-      artistsContainer.appendChild(artistElement);
-    });
-  } catch (error) {
-    console.error("Error loading artists:", error);
-  }
 };
 
 const createArtistCard = (artist) => {
-  const card = document.createElement("div");
-  card.className = "card col-2 mx-1 mb-4";
-  card.setAttribute('style','width: 9rem')
+    const card = document.createElement("div");
+    card.className = "card col-2 mx-1 mb-4";
+    card.setAttribute('style', 'width: 9rem')
 
-  const image = document.createElement("img");
-  image.src = artist.picture_medium;
-  image.className = "card-img-top mt-3"
+    const image = document.createElement("img");
+    image.src = artist.picture_medium;
+    image.className = "card-img-top mt-3"
 
- 
-  const cardBody = document.createElement('div');
-  cardBody.className = "card-body";
 
-  const name = document.createElement("h5");
-  name.innerHTML = artist.name;
-  name.className = "card-title";
- 
-  const text = document.createElement('p');
-  text.className = "card-text";
-  text.innerText = "Artista"
+    const cardBody = document.createElement('div');
+    cardBody.className = "card-body";
 
-  card.appendChild(image);
-  cardBody.append(name,text);
-  card.appendChild(cardBody);
-   
-  return card;
+    const name = document.createElement("h5");
+    name.innerHTML = artist.name;
+    name.className = "card-title";
+
+    const text = document.createElement('p');
+    text.className = "card-text";
+    text.innerText = "Artista"
+
+    card.appendChild(image);
+    cardBody.append(name, text);
+    card.appendChild(cardBody);
+
+    return card;
 
 };
 
- const fetchRandomAlbumsByArtist = async () => {
-  const randomArtist =
-    altArtists[Math.floor(Math.random() * altArtists.length)];
-  try {
-    const response = await fetch(`${searchApi}${randomArtist}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const album = await response.json();
-    if (album.data.length > 0) {
-      const randomAlbumIndex = Math.floor(Math.random() * album.data.length);
-      return album.data[randomAlbumIndex];
+const fetchRandomAlbumsByArtist = async () => {
+    const randomArtist =
+        altArtists[Math.floor(Math.random() * altArtists.length)];
+    try {
+        const response = await fetch(`${searchApi}${randomArtist}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        const album = await response.json();
+        if (album.data.length > 0) {
+            const randomAlbumIndex = Math.floor(Math.random() * album.data.length);
+            return album.data[randomAlbumIndex];
+        }
+        return null;
+    } catch (error) {
+        console.error("Error fetching albums:", error);
     }
-    return null;
-  } catch (error) {
-    console.error("Error fetching albums:", error);
-  }
 };
 
 const loadRandomAlbums = async () => {
-  try {
-    let fetchedAlbums = [];
+    try {
+        let fetchedAlbums = [];
 
-    for (let i = 0; i < altArtists.length; i++) {
-      const randomAlbum = await fetchRandomAlbumsByArtist();
-      if (randomAlbum && randomAlbum.id) {
-        fetchedAlbums.push(randomAlbum);
-      }
+        for (let i = 0; i < altArtists.length; i++) {
+            const randomAlbum = await fetchRandomAlbumsByArtist();
+            if (randomAlbum && randomAlbum.id) {
+                fetchedAlbums.push(randomAlbum);
+            }
+        }
+
+        const uniqueAlbums = Array.from(
+            new Set(fetchedAlbums.map((album) => album.id))
+        ).map((id) => fetchedAlbums.find((album) => album.id === id));
+        const randomAlbums = uniqueAlbums
+            .sort(() => 0.5 - Math.random())
+            .slice(0, 10);
+
+        console.log(randomAlbums);
+
+        const albumsContainer = document.getElementById("container-cards-album");
+        albumsContainer.innerHTML = "";
+
+        randomAlbums.forEach((album) => {
+            const albumElement = createAlbumCard(album);
+            albumsContainer.appendChild(albumElement);
+        });
+    } catch (error) {
+        console.error("Error loading albums:", error);
     }
+};
 
-    const uniqueAlbums = Array.from(
-      new Set(fetchedAlbums.map((album) => album.id))
-    ).map((id) => fetchedAlbums.find((album) => album.id === id));
-    const randomAlbums = uniqueAlbums
-      .sort(() => 0.5 - Math.random())
-      .slice(0, 10);
+const createAlbumCard = (album) => {
+    const card = document.createElement("div");
+    card.className = "card col-2 mx-1 mb-4";
+    card.setAttribute('style', 'width: 9 rem')
 
-    console.log(randomAlbums);
+    const image = document.createElement("img");
+    image.src = album.album.cover_medium;
+    image.className = "card-img-top mt-3"
 
-    const albumsContainer = document.getElementById("container-cards-album");
-    albumsContainer.innerHTML = "";
+    const cardBody = document.createElement('div');
+    cardBody.className = "card-body";
 
-    randomAlbums.forEach((album) => {
-      const albumElement = createAlbumCard(album);
-      albumsContainer.appendChild(albumElement);
-    });
-  } catch (error) {
-    console.error("Error loading albums:", error);
-  }
-}; 
+    const title = document.createElement("h5");
+    title.innerText = album.title;
+    title.className = "card-title";
 
-const createAlbumCard = (album ) => {
-  const card = document.createElement("div");
-  card.className = "card col-2 mx-1 mb-4";
-  card.setAttribute('style','width: 9 rem')
+    const artistName = document.createElement("p");
+    artistName.innerText = album.artist.name;
+    artistName.className = "card-text";
 
-  const image = document.createElement("img");
-  image.src = album.album.cover_medium;
-  image.className = "card-img-top mt-3"
+    card.appendChild(image);
+    cardBody.append(title, artistName);
+    card.appendChild(cardBody);
 
-  const cardBody = document.createElement('div');
-  cardBody.className = "card-body";
-
-  const title = document.createElement("h5");
-  title.innerText = album.title;
-  title.className = "card-title";
-
-  const artistName = document.createElement("p");
-  artistName.innerText = album.artist.name;
-  artistName.className = "card-text";
-
-  card.appendChild(image);
-  cardBody.append(title,artistName);
-  card.appendChild(cardBody);
-
-  return card;
+    return card;
 };
 
 /* const albumsContainer = document.getElementById("container-cards-album");
@@ -1847,52 +1847,52 @@ const createAlbumCard = () => {
  */
 
 const fetchRandomTracks = async () => {
-  let tracks = [];
-  try {
- 
-    while (tracks.length < 7) {
-      const artist = await fetchRandomArtist();
-      console.log("Fetched artist:", artist);
+    let tracks = [];
+    try {
 
-      if (artist && artist.tracklist) {
-        const tracklistResponse = await fetch(artist.tracklist);
+        while (tracks.length < 7) {
+            const artist = await fetchRandomArtist();
+            console.log("Fetched artist:", artist);
 
-        const data = await tracklistResponse.json();
-        console.log("Tracklist data:", data);
+            if (artist && artist.tracklist) {
+                const tracklistResponse = await fetch(artist.tracklist);
 
-        if (data && data.data && data.data.length > 0) {
-          const randomIndex = Math.floor(Math.random() * data.data.length);
-          const track = data.data[randomIndex];
-          if (!tracks.some((t) => t.id === track.id)) {
-            tracks.push(track);
-          }
+                const data = await tracklistResponse.json();
+                console.log("Tracklist data:", data);
+
+                if (data && data.data && data.data.length > 0) {
+                    const randomIndex = Math.floor(Math.random() * data.data.length);
+                    const track = data.data[randomIndex];
+                    if (!tracks.some((t) => t.id === track.id)) {
+                        tracks.push(track);
+                    }
+                }
+            }
+
+            if (tracks.length >= 7) break;
         }
-      }
 
-      if (tracks.length >= 7) break;
+        const tracksContainer = document.getElementById("tracksCard");
+        tracksContainer.innerHTML = "";
+
+        tracks.forEach((track) => {
+            const trackElement = cardTracks(track.album, track.artist);
+            tracksContainer.appendChild(trackElement);
+        });
+
+    } catch (error) {
+        console.error("Error fetching tracks:", error);
     }
-    
-  const tracksContainer = document.getElementById("tracksCard");
-  tracksContainer.innerHTML = "";
 
-tracks.forEach((track) => {
-    const trackElement = cardTracks(track.album,track.artist);
-    tracksContainer.appendChild(trackElement);
-  });
-
-  } catch (error) {
-    console.error("Error fetching tracks:", error);
-  }
-
-  console.log("Final tracks:", tracks);
+    console.log("Final tracks:", tracks);
 
 
 };
 
 const cardTracks = (album, artist) => {
-  const card = document.createElement("div");
-  card.className = "card col-2 mx-1 mb-4";
-  card.setAttribute('style', 'width: 9rem');
+    const card = document.createElement("div");
+    card.className = "card col-2 mx-1 mb-4";
+    card.setAttribute('style', 'width: 9rem');
 
 
     const image = document.createElement("img");
@@ -1900,26 +1900,26 @@ const cardTracks = (album, artist) => {
     image.src = album.cover_medium;
     card.appendChild(image);
 
-  const cardBody = document.createElement('div');
-  cardBody.className = "card-body";
+    const cardBody = document.createElement('div');
+    cardBody.className = "card-body";
 
 
     const name = document.createElement("h5");
     name.className = "card-title";
     name.innerText = album.title;
     cardBody.appendChild(name);
-  
 
-  if (artist && artist.name) {
-    const text = document.createElement('p');
-    text.className = "card-text";
-    text.innerText = artist.name;
-    cardBody.appendChild(text);
-  }
 
-  card.appendChild(cardBody);
+    if (artist && artist.name) {
+        const text = document.createElement('p');
+        text.className = "card-text";
+        text.innerText = artist.name;
+        cardBody.appendChild(text);
+    }
 
-  return card;
+    card.appendChild(cardBody);
+
+    return card;
 }
 
 
@@ -1957,112 +1957,112 @@ const mainContainer = document.getElementById("main-container");
 const searchButton = document.getElementById("search-button");
 
 searchForm.addEventListener("submit", async (event) => {
-  event.preventDefault();
+    event.preventDefault();
 
-  const searchTerm = searchInput.value.trim();
+    const searchTerm = searchInput.value.trim();
 
-  if (searchTerm === "") {
-    alert("Please write something!");
-    return;
-  }
+    if (searchTerm === "") {
+        alert("Please write something!");
+        return;
+    }
 
-  try {
-    const searchResults = await fetchSearchResults(searchTerm);
-    displayResults(searchResults);
-  } catch (error) {
-    console.error("Search error:", error);
-  }
+    try {
+        const searchResults = await fetchSearchResults(searchTerm);
+        displayResults(searchResults);
+    } catch (error) {
+        console.error("Search error:", error);
+    }
 });
 
 searchButton.addEventListener("click", async (event) => {
-  event.preventDefault();
+    event.preventDefault();
 
-  const searchTerm = searchInput.value.trim();
+    const searchTerm = searchInput.value.trim();
 
-  if (searchTerm === "") {
-    alert("Please write something!");
-    return;
-  }
+    if (searchTerm === "") {
+        alert("Please write something!");
+        return;
+    }
 
-  try {
-    const searchResults = await fetchSearchResults(searchTerm);
-    displayResults(searchResults);
-  } catch (error) {
-    console.error("Search error:", error);
-  }
+    try {
+        const searchResults = await fetchSearchResults(searchTerm);
+        displayResults(searchResults);
+    } catch (error) {
+        console.error("Search error:", error);
+    }
 });
 
 const fetchSearchResults = async (term) => {
-  const response = await fetch(`${searchApi}${term}`, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  const data = await response.json();
-  console.log(data);
-  return data.data;
+    const response = await fetch(`${searchApi}${term}`, {
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+    const data = await response.json();
+    console.log(data);
+    return data.data;
 };
 
 const displayResults = (results) => {
-  mainContainer.innerHTML = "";
+    mainContainer.innerHTML = "";
 
-  if (results.length === 0) {
-    mainContainer.innerHTML =
-      "<p>These aren't the droids you're looking for.</p>";
-    return;
-  }
+    if (results.length === 0) {
+        mainContainer.innerHTML =
+            "<p>These aren't the droids you're looking for.</p>";
+        return;
+    }
 
-  results.forEach((result) => {
-    const resultElement = createResultElement(result);
-    mainContainer.appendChild(resultElement);
-  });
+    results.forEach((result) => {
+        const resultElement = createResultElement(result);
+        mainContainer.appendChild(resultElement);
+    });
 };
 
 const createResultElement = (result) => {
-  const { id, title, link, artist, album } = result;
+    const { id, title, link, artist, album } = result;
 
-  const searchContainer = document.createElement("div");
-  searchContainer.classList.add("container-fluid", "p-3");
+    const searchContainer = document.createElement("div");
+    searchContainer.classList.add("container-fluid", "p-3");
 
-  const resultDiv = document.createElement("div");
-  resultDiv.classList.add("row", "row-cols-2", "result");
+    const resultDiv = document.createElement("div");
+    resultDiv.classList.add("row", "row-cols-2", "result");
 
-  const albumCoverDiv = document.createElement("div");
-  albumCoverDiv.classList.add("col-2");
-  const albumCoverImg = document.createElement("img");
-  albumCoverImg.src = album.cover_medium;
-  albumCoverImg.alt = `${album.title} Cover`;
-  albumCoverImg.classList.add("img-fluid", "rounded");
-  albumCoverDiv.appendChild(albumCoverImg);
+    const albumCoverDiv = document.createElement("div");
+    albumCoverDiv.classList.add("col-2");
+    const albumCoverImg = document.createElement("img");
+    albumCoverImg.src = album.cover_medium;
+    albumCoverImg.alt = `${album.title} Cover`;
+    albumCoverImg.classList.add("img-fluid", "rounded");
+    albumCoverDiv.appendChild(albumCoverImg);
 
-  const infoDiv = document.createElement("div");
-  infoDiv.classList.add("col-10", "d-flex", "flex-column", "justify-content-between");
+    const infoDiv = document.createElement("div");
+    infoDiv.classList.add("col-10", "d-flex", "flex-column", "justify-content-between");
 
-  const titleElement = document.createElement("h3");
-  titleElement.textContent = title;
+    const titleElement = document.createElement("h3");
+    titleElement.textContent = title;
 
-  const artistLink = document.createElement("a");
-  artistLink.href = artist.link;
-  artistLink.textContent = `Artist: ${artist.name}`;
+    const artistLink = document.createElement("a");
+    artistLink.href = artist.link;
+    artistLink.textContent = `Artist: ${artist.name}`;
 
-  const albumLink = document.createElement("a");
-  albumLink.href = album.link;
-  albumLink.textContent = `Album: ${album.title}`;
+    const albumLink = document.createElement("a");
+    albumLink.href = album.link;
+    albumLink.textContent = `Album: ${album.title}`;
 
-  const trackLink = document.createElement("a");
-  trackLink.href = link;
-  trackLink.textContent = "Open Track";
+    const trackLink = document.createElement("a");
+    trackLink.href = link;
+    trackLink.textContent = "Open Track";
 
-  infoDiv.appendChild(titleElement);
-  infoDiv.appendChild(artistLink);
-  infoDiv.appendChild(albumLink);
-  infoDiv.appendChild(trackLink);
+    infoDiv.appendChild(titleElement);
+    infoDiv.appendChild(artistLink);
+    infoDiv.appendChild(albumLink);
+    infoDiv.appendChild(trackLink);
 
-  resultDiv.appendChild(albumCoverDiv);
-  resultDiv.appendChild(infoDiv);
+    resultDiv.appendChild(albumCoverDiv);
+    resultDiv.appendChild(infoDiv);
 
-  searchContainer.appendChild(resultDiv);
+    searchContainer.appendChild(resultDiv);
 
-  return searchContainer;
+    return searchContainer;
 };
