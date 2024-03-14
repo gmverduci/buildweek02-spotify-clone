@@ -12,7 +12,7 @@ const token =
 const artists = [
   719, 275373, 11, 13, 3381, 2468, 1005, 412, 848, 927, 636, 210, 176, 115, 863,
   1379, 637, 405, 415, 1154, 849, 868, 663, 847, 3307, 3350, 817, 808, 1723,
-  687, 5292, 820, 1032, 239, 2048, 2799, 1658, 9052, 2025, 3, 2, 2519, 1309,
+  687, 5292, 820, 1032, 239, 2048, 2799, 1658, 9052, 2025, 3, 2, 2519, 1309, 2449, 1342, 2059, 2337, 617, 997, 
 ];
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -31,7 +31,8 @@ const init = async () => {
 
     for (const artist of cachedArtists) {
       const artistId = artist.id;
-      const albums = await loadRandomAlbums(artistId);
+      const artistName = artist.name;
+      const albums = await loadRandomAlbums(artistName);
       allAlbums = allAlbums.concat(albums);
       const tracks = await loadRandomTracks(artistId);
       allTracks = allTracks.concat(tracks);
@@ -45,7 +46,7 @@ const init = async () => {
     albumContainer.innerHTML = "";
 
     allAlbums.forEach((album) => {
-      const cards = createAlbumCard(album, album.artist);
+      const cards = createAlbumCard(album);
       albumContainer.appendChild(cards);
       console.log(allAlbums);
     });
@@ -157,13 +158,13 @@ const createArtistCard = (artist) => {
   return card;
 };
 
-const createAlbumCard = (album, artist) => {
+const createAlbumCard = (album) => {
   const card = document.createElement("div");
   card.className = "card col-2 mx-1 mb-4";
   card.setAttribute("style", "width: 15 rem");
 
   const image = document.createElement("img");
-  image.src = album.album.cover_xl;
+  image.src = album.cover_xl;
   image.className = "card-img-top mt-3";
 
   const cardBody = document.createElement("div");
@@ -173,22 +174,18 @@ const createAlbumCard = (album, artist) => {
   title.innerText = album.title;
   title.className = "card-title";
 
-  const artistName = document.createElement("p");
-  artistName.innerText = artist.name;
-  artistName.className = "card-text";
-
   card.appendChild(image);
-  cardBody.append(title, artistName);
+  cardBody.append(title);
   card.appendChild(cardBody);
   console.log(album);
   return card;
 };
 
-const loadRandomAlbums = async (artistId) => {
+const loadRandomAlbums = async (artistName) => {
   try {
     await delay(0);
 
-    const response = await fetch(`${searchApi}${artistId}`, {
+    const response = await fetch(`${searchApi}${artistName}`, {
       method: "GET",
     });
     if (!response.ok) {
@@ -201,9 +198,13 @@ const loadRandomAlbums = async (artistId) => {
       return null;
     }
     const data = await response.json();
-    if (data.data.length > 0) {
-      const randomIndex = Math.floor(Math.random() * data.data.length);
-      const album = data.data[randomIndex];
+    let albums = [];
+    data.data.forEach((index) => albums.push(index.album));
+    console.log('Albums:', albums)
+
+    if (albums.length > 0) {
+      const randomIndex = Math.floor(Math.random() * albums.length);
+      const album = albums[randomIndex];
       console.log("Fetched album:", album);
       return album;
     } else {
