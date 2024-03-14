@@ -164,7 +164,7 @@ const createAlbumCard = (album) => {
   card.setAttribute("style", "width: 10 rem");
 
   const image = document.createElement("img");
-  image.src = album.cover_xl;
+  image.src = album.cover_medium;
   image.className = "card-img-top mt-3";
 
   const cardBody = document.createElement("div");
@@ -256,7 +256,7 @@ const cardTracks = (album, artist) => {
 
   const image = document.createElement("img");
   image.className = "card-img-top mt-3 rounded-circle";
-  image.src = album.cover_xl;
+  image.src = album.cover_medium;
   card.appendChild(image);
 
   const cardBody = document.createElement("div");
@@ -358,7 +358,7 @@ const createResultElement = (result) => {
   const albumCoverDiv = document.createElement("div");
   albumCoverDiv.classList.add("col-4");
   const albumCoverImg = document.createElement("img");
-  albumCoverImg.src = album.cover_xl;
+  albumCoverImg.src = album.cover_medium;
   albumCoverImg.alt = `${album.title} Cover`;
   albumCoverImg.classList.add("img-fluid", "rounded" );
   albumCoverDiv.appendChild(albumCoverImg);

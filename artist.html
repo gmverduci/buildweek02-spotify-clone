@@ -28,7 +28,7 @@
   <body data-bs-theme="dark">
     <div class="container-fluid">
       <div class="row">
-        <div class="container col-12 col-md-3  position-fixed ">
+        <div class="container col-12 col-md-3 fix ">
           <nav class="navbar navbar-expand-lg bg-body-tertiary rounded-2">
             <div class="container-fluid d-flex flex-column align-items-start">
               <a class="navbar-brand" href="home.html"><img src="assets/img/Spotify_Logo_CMYK_White.png" width="100" alt="" /></a>
@@ -53,7 +53,7 @@
               </div>
             </div>
           </nav>
-          <div class="container ">
+          <div class="container d-none d-md-block">
             <div class="row align-content-between altezza finto-footer">
               <div class="container "> <!-- libreria-->
                 <div class="row">
@@ -125,22 +125,24 @@
           </div>
         </div>
 
-        <div class="col-12 col-md-9 mt-2 p-0 pe-2 position-absolute  top-0 end-0" id="main-container">
-          <div class="container sticky-top">
+        <div class="col-12 col-md-9 mt-3 mt-md-2 p-0 pe-2 abs" id="main-container">
+          <div class="container mt-md-0 mt-5 sticky-top ">
             <div class="row">
               <div
                 class="col-12 d-flex justify-content-between bg-body-tertiary bg-opacity-75"
               >
                 <div class="d-flex">
                   <div
-                    class="btn text-white rounded-5 d-flex align-items-center justify-content-center me-3"
+                    class="btn text-white rounded-circle d-flex align-items-center justify-content-center me-3"
                   >
                     <i class="bi bi-chevron-left btn" id="button-prev"></i>
+
                   </div>
                   <div
-                    class="btn text-white rounded-5 d-flex justify-content-center align-items-center"
+                    class="btn  rounded-circle d-flex justify-content-center align-items-center"
                   >
                     <i class="bi bi-chevron-right btn" id="button-next"></i>
+
                   </div>
                 </div>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
