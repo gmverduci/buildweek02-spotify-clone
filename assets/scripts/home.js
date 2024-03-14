@@ -99,7 +99,7 @@ const loadRandomArtists = async () => {
   let fetchedArtists = [];
   const selectedArtistIds = new Set();
 
-  while (fetchedArtists.length < 7) {
+  while (fetchedArtists.length < 8) {
     const randomIndex = Math.floor(Math.random() * artists.length);
     const randomArtistId = artists[randomIndex];
 
@@ -164,7 +164,7 @@ const createAlbumCard = (album) => {
   card.setAttribute("style", "width: 15 rem");
 
   const image = document.createElement("img");
-  image.src = album.cover_xl;
+  image.src = album.cover_medium;
   image.className = "card-img-top mt-3";
 
   const cardBody = document.createElement("div");
@@ -256,7 +256,7 @@ const cardTracks = (album, artist) => {
 
   const image = document.createElement("img");
   image.className = "card-img-top mt-3 rounded-circle";
-  image.src = album.cover_xl;
+  image.src = album.cover_medium;
   card.appendChild(image);
 
   const cardBody = document.createElement("div");
