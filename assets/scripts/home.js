@@ -111,8 +111,13 @@ const fetchRandomArtist = async () => {
       }
     }
 
-    const artistsContainer = document.getElementById("container-cards-artista");
+const createArtistCard = (artist) => {
+  const artistsContainer = document.getElementById("container-cards-artista");
     artistsContainer.innerHTML = "";
+  const card = document.createElement("div");
+  card.className = "card col-2 mx-1 mb-4 text-center";
+  card.setAttribute("style", "width: 10rem");
+
 
     fetchedArtists.forEach((artist) => {
         const artistElement = createArtistCard(artist);
@@ -126,6 +131,7 @@ const fetchRandomArtist = async () => {
         console.error("No artists fetched successfully.");
     }
 };
+
 
 const createArtistCard = (artist) => {
     const card = document.createElement("div");
@@ -141,13 +147,13 @@ const createArtistCard = (artist) => {
 
     const name = document.createElement("h5");
     name.innerHTML = artist.name;
-    name.className = "card-title";
+    name.className = "card-title overfooter grandezza";
     name.addEventListener("click", () => {
         window.location.href = `artist.html?artistId=${artist.id}`;
     });
 
     const text = document.createElement("p");
-    text.className = "card-text";
+    text.className = "card-text text-success";
     text.innerText = "Artista";
 
     card.appendChild(image);
@@ -160,19 +166,19 @@ const createArtistCard = (artist) => {
 const createAlbumCard = (album) => {
 
   const card = document.createElement("div");
-  card.className = "card col-2 mx-1 mb-4";
-  card.setAttribute("style", "width: 15 rem");
+  card.className = "card col-2 mx-1 mb-4 text-center";
+  card.setAttribute("style", "width: 10 rem");
 
   const image = document.createElement("img");
   image.src = album.cover_medium;
   image.className = "card-img-top mt-3";
 
   const cardBody = document.createElement("div");
-  cardBody.className = "card-body";
+  cardBody.className = "card-body ";
 
   const title = document.createElement("h5");
   title.innerText = album.title;
-  title.className = "card-title";
+  title.className = "card-title overfooter grandezza";
 
   card.appendChild(image);
   cardBody.append(title);
@@ -250,9 +256,10 @@ const loadRandomTracks = async (artistId) => {
 };
 
 const cardTracks = (album, artist) => {
-    const card = document.createElement("div");
-    card.className = "card col-2 mx-1 mb-4 text-center cardColor ";
-    card.setAttribute("style", "width: 15rem");
+  const card = document.createElement("div");
+  card.className = "card col-2 mx-1 mb-4 text-center cardColor ";
+  card.setAttribute("style", "width: 10rem");
+
 
   const image = document.createElement("img");
   image.className = "card-img-top mt-3 rounded-circle";
@@ -262,15 +269,16 @@ const cardTracks = (album, artist) => {
     const cardBody = document.createElement("div");
     cardBody.className = "card-body";
 
-    const name = document.createElement("h5");
-    name.className = "card-title overfooter ";
-    name.innerText = album.title;
-    cardBody.appendChild(name);
+  const name = document.createElement("h5");
+  name.className = "card-title overfooter grandezza ";
+  name.innerText = album.title;
+  cardBody.appendChild(name);
 
-    const text = document.createElement("p");
-    text.className = "card-text text-danger fw-bold";
-    text.innerText = artist.name;
-    cardBody.appendChild(text);
+  const text = document.createElement("p");
+  text.className = "card-text  textbluu fw-bold";
+  text.innerText = artist.name;
+  cardBody.appendChild(text);
+
 
     card.appendChild(cardBody);
 
@@ -348,42 +356,48 @@ const displayResults = (results) => {
 const createResultElement = (result) => {
     const { id, title, link, artist, album } = result;
 
-    const searchContainer = document.createElement("div");
-    searchContainer.classList.add("container-fluid", "p-3");
+  const searchContainer = document.createElement("div");
+  searchContainer.classList.add("container-fluid", "p-3");
+  
 
-    const resultDiv = document.createElement("div");
-    resultDiv.classList.add("row", "row-cols-2", "result");
+  const resultDiv = document.createElement("div");
+  resultDiv.classList.add("row", "d-flex", "result");
 
-    const albumCoverDiv = document.createElement("div");
-    albumCoverDiv.classList.add("col-2");
-    const albumCoverImg = document.createElement("img");
-    albumCoverImg.src = album.cover_medium;
-    albumCoverImg.alt = `${album.title} Cover`;
-    albumCoverImg.classList.add("img-fluid", "rounded");
-    albumCoverDiv.appendChild(albumCoverImg);
+  const albumCoverDiv = document.createElement("div");
+  albumCoverDiv.classList.add("col-5");
+  const albumCoverImg = document.createElement("img");
+  albumCoverImg.src = album.cover_xl;
+  albumCoverImg.alt = `${album.title} Cover`;
+  albumCoverImg.classList.add("img-fluid", "rounded" );
+  albumCoverDiv.appendChild(albumCoverImg);
+ 
+  const infoDiv = document.createElement("div");
+  infoDiv.classList.add(
+    "col-6",
+    "d-flex",
+    "flex-column",
+    "ms-5"
+  );
 
-    const infoDiv = document.createElement("div");
-    infoDiv.classList.add(
-        "col-10",
-        "d-flex",
-        "flex-column",
-        "justify-content-between"
-    );
+  const titleElement = document.createElement("h4");
+  titleElement.className = "overfooter";
+  titleElement.textContent = title;
 
-    const titleElement = document.createElement("h3");
-    titleElement.textContent = title;
+  const artistLink = document.createElement("a");
+  artistLink.className = "text-decoration-none text-success overfooter";
+  artistLink.href = artist.link;
+  artistLink.textContent = `Artist: ${artist.name}`;
 
-    const artistLink = document.createElement("a");
-    artistLink.href = artist.link;
-    artistLink.textContent = `Artist: ${artist.name}`;
+  const albumLink = document.createElement("a");
+  albumLink.className = "text-decoration-none text-success overfooter";
+  albumLink.href = album.link;
+  albumLink.textContent = `Album: ${album.title}`;
 
-    const albumLink = document.createElement("a");
-    albumLink.href = album.link;
-    albumLink.textContent = `Album: ${album.title}`;
+  const trackLink = document.createElement("a");
+  trackLink.className = "text-decoration-none text-success ";
+  trackLink.href = link;
+  trackLink.textContent = "Open Track";
 
-    const trackLink = document.createElement("a");
-    trackLink.href = link;
-    trackLink.textContent = "Open Track";
 
     infoDiv.appendChild(titleElement);
     infoDiv.appendChild(artistLink);

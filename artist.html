@@ -28,164 +28,104 @@
   <body data-bs-theme="dark">
     <div class="container-fluid">
       <div class="row">
-        <div class="container col-12 col-md-3 mt-2">
+        <div class="container col-12 col-md-3  position-fixed ">
           <nav class="navbar navbar-expand-lg bg-body-tertiary rounded-2">
             <div class="container-fluid d-flex flex-column align-items-start">
-              <a class="navbar-brand" href="home.html">
-                <img
-                  src="assets/img/Spotify_Logo_CMYK_White.png"
-                  width="100"
-                  alt=""
-                />
-              </a>
-              <button
-                class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-              >
+              <a class="navbar-brand" href="home.html"><img src="assets/img/Spotify_Logo_CMYK_White.png" width="100" alt="" /></a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
-              <div
-                class="collapse navbar-collapse d-flex flex-column"
-                id="navbarSupportedContent"
-              >
+              <div class="collapse navbar-collapse d-flex flex-column" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a
-                      class="nav-link active p-0 my-2 mb-3 ps-2"
-                      aria-current="page"
-                      href="home.html"
-                    >
-                      <i class="bi bi-house-door"></i> Home
-                    </a>
+                    <a class="nav-link active p-0 my-2 mb-3 ps-2" aria-current="page" href="home.html"><i
+                        class="bi bi-house-door"></i> Home</a>
                   </li>
                 </ul>
                 <form class="d-flex" id="search-form" role="search">
-                  <button
-                    class="btn me-1 text-white ps-2"
-                    id="search-button"
-                    type="submit"
-                  >
+                  <button class="btn me-1 text-white ps-2" id="search-button" type="submit">
                     <i class="bi bi-search"></i>
                   </button>
-                  <input
-                    class="form-control"
-                    id="search-input"
-                    type="search"
-                    placeholder="Cerca"
-                    aria-label="Search"
-                  />
+                  <input class="form-control" id="search-input" type="search" placeholder="Cerca" aria-label="Search" />
                 </form>
               </div>
             </div>
           </nav>
-          <div class="container">
-            <div class="row">
-              <div
-                class="container d-flex justify-content-between mt-2 bg-body-tertiary rounded-2"
-              >
-                <div class="d-flex mt-2">
-                  <span class="me-2"
-                    ><i class="bi bi-collection-play"></i
-                  ></span>
-                  <p class="mb-2">La tua libreria</p>
-                </div>
-                <span class="mt-2"><i class="bi bi-plus-lg"></i></span>
-              </div>
-              <div class="container bg-body-tertiary rounded-2 mt-2">
+          <div class="container ">
+            <div class="row align-content-between altezza finto-footer">
+              <div class="container "> <!-- libreria-->
                 <div class="row">
-                  <h4 class="fw-bold grandezza mt-2">
-                    Crea la tua prima playlist
-                  </h4>
-                  <p class="grandezza mb-3">È facile, ti aiuteremo</p>
-                  <div>
-                    <button
-                      type="button"
-                      class="btn bg-white text-black fw-bold grandezza-btn mb-3 rounded-5"
-                    >
-                      Crea playlist
-                    </button>
+                  <div class="container d-flex justify-content-between mt-2 bg-body-tertiary rounded-2">
+                    <div class="d-flex mt-2">
+                      <span class="me-2"><i class="bi bi-collection-play"></i></span>
+                      <p class="mb-2">La tua libreria</p>
+                    </div>
+                    <span class="mt-2"><i class="bi bi-plus-lg"></i></span>
+                  </div>
+                  <div class="container bg-body-tertiary rounded-2 mt-2"> <!-- playlist -->
+                    <div class="row">
+                      <h4 class="fw-bold grandezza mt-2">
+                        Crea la tua prima playlist
+                      </h4>
+                      <p class="grandezza mb-3">E'facile,ti aiuteremo</p>
+                      <div>
+                        <button type="button" class="btn bg-white text-black fw-bold grandezza-btn mb-3 rounded-5">
+                          Crea playlist
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="container bg-body-tertiary rounded-2 mt-2"><!-- podcast-->
+                    <div class="row">
+                      <h4 class="fw-bold grandezza mt-2">
+                        Crea qualche podcast da seguire
+                      </h4>
+                      <p class="grandezza mb-3">
+                        Ti aggiorneremo sui nuovi episodi
+                      </p>
+                      <div>
+                        <button type="button" class="btn bg-white text-black fw-bold grandezza-btn mb-3 rounded-5">
+                          Sfoglia i podcast
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="container bg-body-tertiary rounded-2 mt-2">
-                <div class="row">
-                  <h4 class="fw-bold grandezza mt-2">
-                    Crea qualche podcast da seguire
-                  </h4>
-                  <p class="grandezza mb-3">
-                    Ti aggiorneremo sui nuovi episodi
-                  </p>
+              <div class="container d-none d-md-flex "><!--finto-footer-->
+                <div class="row ">
+                  <div class="d-flex ">
+                    <a class="text-decoration-none grandezza-link text-white me-2"
+                      href="javascript:void(0)">Informazioni legali</a>
+                    <a class="text-decoration-none grandezza-link text-white " href="javascript:void(0)">Sicurezza e
+                      Centro sulla privacy</a>
+                  </div>
+                  <div class="d-flex mt-2"><a class="text-decoration-none grandezza-link text-white me-2"
+                      href="javascript:void(0)">Informativa sulla privacy</a>
+                    <a class="text-decoration-none grandezza-link text-white me-2" href="javascript:void(0)">Impostazioni
+                      cookie</a>
+                    <a class="text-decoration-none grandezza-link text-white" href="javascript:void(0)">Info annunci<a>
+                  </div>
+                  <a class="text-decoration-none grandezza-link text-white mt-2"
+                    href="javascript:void(0)">Accessibilità</a>
+                  <a class="text-decoration-none grandezza-link text-white mt-2" href="javascript:void(0)">Politica su
+                    cookie</a>
+  
                   <div>
-                    <button
-                      type="button"
-                      class="btn bg-white text-black fw-bold grandezza-btn mb-3 rounded-5"
-                    >
-                      Sfoglia i podcast
+                    <button type="button"
+                      class="btn border border-white text-white fw-bold grandezza-btn mb-3 mt-4 rounded-5">
+                      <i class="bi bi-globe2"></i> Italiano
                     </button>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="container d-none d-md-flex">
-            <div class="row">
-              <div class="d-flex">
-                <a
-                  class="text-decoration-none grandezza-link text-white me-2"
-                  href="javascript:void(0)"
-                  >Informazioni legali</a
-                >
-                <a
-                  class="text-decoration-none grandezza-link text-white"
-                  href="javascript:void(0)"
-                  >Sicurezza e Centro sulla privacy</a
-                >
-              </div>
-              <div class="d-flex mt-2">
-                <a
-                  class="text-decoration-none grandezza-link text-white me-2"
-                  href="javascript:void(0)"
-                  >Informativa sulla privacy</a
-                >
-                <a
-                  class="text-decoration-none grandezza-link text-white me-2"
-                  href="javascript:void(0)"
-                  >Impostazioni cookie</a
-                >
-                <a
-                  class="text-decoration-none grandezza-link text-white me-2"
-                  href="javascript:void(0)"
-                  >Info annunci</a
-                >
-                <a
-                  class="text-decoration-none grandezza-link text-white"
-                  href="javascript:void(0)"
-                  >Accessibilità</a
-                >
-              </div>
-              <a
-                class="text-decoration-none grandezza-link text-white mt-2"
-                href="javascript:void(0)"
-                >Politica su cookie</a
-              >
-              <div>
-                <button
-                  type="button"
-                  class="btn border border-white text-white fw-bold grandezza-btn mb-3 mt-4 rounded-5"
-                >
-                  <i class="bi bi-globe2"></i> Italiano
-                </button>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="col-12 col-md-9 mt-2 p-0 pe-2" id="main-container">
+        <div class="col-12 col-md-9 mt-2 p-0 pe-2 position-absolute  top-0 end-0" id="main-container">
           <div class="container sticky-top">
             <div class="row">
               <div
@@ -317,6 +257,7 @@
                   <tr>
                     <th scope="row">3</th>
                     <td colspan="2">
+
                       <p class="m-0 lh-1 fs-5" id="song-3">titolo canzone</p>
                       <small class="fs-9" id="track-album-3"
                         ><i class="bi bi-e-square"></i
