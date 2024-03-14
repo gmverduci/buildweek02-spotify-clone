@@ -164,3 +164,5 @@ const loadRandomTracks = async (artistId) => {
 };
 
 document.addEventListener("DOMContentLoaded", init);
+
+
