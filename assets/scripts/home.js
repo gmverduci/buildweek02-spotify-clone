@@ -95,11 +95,12 @@ const fetchRandomArtist = async () => {
   }
 };
 
+
 const loadRandomArtists = async () => {
   let fetchedArtists = [];
   const selectedArtistIds = new Set();
 
-  while (fetchedArtists.length < 7) {
+  while (fetchedArtists.length < 10) {
     const randomIndex = Math.floor(Math.random() * artists.length);
     const randomArtistId = artists[randomIndex];
 
@@ -112,13 +113,24 @@ const loadRandomArtists = async () => {
     }
   }
 
-  const artistsContainer = document.getElementById("container-cards-artista");
-  artistsContainer.innerHTML = "";
+  const artistsContainer1 = document.getElementById("container-cards-artista");
+  const artistsContainer2 = document.getElementById("container-cards-artista-2");
+  artistsContainer1.innerHTML = "";
+  artistsContainer2.innerHTML = "";
 
-  fetchedArtists.forEach((artist) => {
+  const firstGroup = fetchedArtists.slice(0, 5);
+  const secondGroup = fetchedArtists.slice(5);
+
+  firstGroup.forEach((artist) => {
     const artistElement = createArtistCard(artist);
-    artistsContainer.appendChild(artistElement);
+    artistsContainer1.appendChild(artistElement);
   });
+
+  secondGroup.forEach((artist) => {
+    const artistElement = createArtistCard(artist);
+    artistsContainer2.appendChild(artistElement);
+  });
+
   console.log("Fetched artists before storing:", fetchedArtists);
   if (fetchedArtists.length > 0) {
     localStorage.setItem(artistsCache, JSON.stringify(fetchedArtists));
@@ -130,19 +142,19 @@ const loadRandomArtists = async () => {
 
 const createArtistCard = (artist) => {
   const card = document.createElement("div");
-  card.className = "card col-2 mx-1 mb-4 text-center";
+  card.className = "card col-2 mx-1 mb-4 text-center altezza";
   card.setAttribute("style", "width: 10rem");
 
   const image = document.createElement("img");
   image.src = artist.picture_big;
-  image.className = "card-img-top mt-3";
+  image.className = "card-img-top mt-3 rounded-circle";
 
   const cardBody = document.createElement("div");
-  cardBody.className = "card-body";
+  cardBody.className = "card-body pt-0";
 
   const name = document.createElement("h5");
   name.innerHTML = artist.name;
-  name.className = "card-title overfooter grandezza";
+  name.className = "card-title overfooter grandezza mb-0 lh-1";
   name.addEventListener("click", () => {
     window.location.href = `artist.html?artistId=${artist.id}`;
   });
@@ -151,8 +163,19 @@ const createArtistCard = (artist) => {
   text.className = "card-text text-success";
   text.innerText = "Artista";
 
-  card.appendChild(image);
-  cardBody.append(name, text);
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "rounded-5 btn text-success fs-3 ";
+  button.innerHTML = '<i class="bi bi-play-circle"></i>';
+
+
+  button.addEventListener("click", () => {
+
+  });
+
+  card.appendChild(image); 
+   card.appendChild(button);
+  cardBody.append(name, text); 
   card.appendChild(cardBody);
 
   return card;
@@ -165,7 +188,7 @@ const createAlbumCard = (album) => {
 
   const image = document.createElement("img");
   image.src = album.cover_medium;
-  image.className = "card-img-top mt-3";
+  image.className = "card-img-top mt-3 ";
 
   const cardBody = document.createElement("div");
   cardBody.className = "card-body ";
@@ -400,7 +423,13 @@ const createResultElement = (result) => {
 
   searchContainer.appendChild(resultDiv);
 
+
+
+
+  
   return searchContainer;
+
+
 };
 
 document.addEventListener("DOMContentLoaded", init);
