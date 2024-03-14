@@ -95,21 +95,20 @@ const fetchRandomArtist = async () => {
     }
 };
 
-const loadRandomArtists = async () => {
-    let fetchedArtists = [];
-    const selectedArtistIds = new Set();
 
-    while (fetchedArtists.length < 7) {
-        const randomIndex = Math.floor(Math.random() * artists.length);
-        const randomArtistId = artists[randomIndex];
+  let fetchedArtists = [];
+  const selectedArtistIds = new Set();
 
-        if (!selectedArtistIds.has(randomArtistId)) {
-            selectedArtistIds.add(randomArtistId);
-            const artist = await fetchRandomArtist(randomArtistId);
-            if (artist) {
-                fetchedArtists.push(artist);
-            }
-        }
+  while (fetchedArtists.length < 8) {
+    const randomIndex = Math.floor(Math.random() * artists.length);
+    const randomArtistId = artists[randomIndex];
+
+    if (!selectedArtistIds.has(randomArtistId)) {
+      selectedArtistIds.add(randomArtistId);
+      const artist = await fetchRandomArtist(randomArtistId);
+      if (artist) {
+        fetchedArtists.push(artist);
+      }
     }
 
     const artistsContainer = document.getElementById("container-cards-artista");
@@ -159,26 +158,27 @@ const createArtistCard = (artist) => {
 };
 
 const createAlbumCard = (album) => {
-    const card = document.createElement("div");
-    card.className = "card col-2 mx-1 mb-4";
-    card.setAttribute("style", "width: 15 rem");
 
-    const image = document.createElement("img");
-    image.src = album.cover_xl;
-    image.className = "card-img-top mt-3";
+  const card = document.createElement("div");
+  card.className = "card col-2 mx-1 mb-4";
+  card.setAttribute("style", "width: 15 rem");
 
-    const cardBody = document.createElement("div");
-    cardBody.className = "card-body";
+  const image = document.createElement("img");
+  image.src = album.cover_medium;
+  image.className = "card-img-top mt-3";
 
-    const title = document.createElement("h5");
-    title.innerText = album.title;
-    title.className = "card-title";
+  const cardBody = document.createElement("div");
+  cardBody.className = "card-body";
 
-    card.appendChild(image);
-    cardBody.append(title);
-    card.appendChild(cardBody);
-    console.log(album);
-    return card;
+  const title = document.createElement("h5");
+  title.innerText = album.title;
+  title.className = "card-title";
+
+  card.appendChild(image);
+  cardBody.append(title);
+  card.appendChild(cardBody);
+  console.log(album);
+  return card;
 };
 
 const loadRandomAlbums = async (artistName) => {
@@ -254,10 +254,10 @@ const cardTracks = (album, artist) => {
     card.className = "card col-2 mx-1 mb-4 text-center cardColor ";
     card.setAttribute("style", "width: 15rem");
 
-    const image = document.createElement("img");
-    image.className = "card-img-top mt-3 rounded-circle";
-    image.src = album.cover_xl;
-    card.appendChild(image);
+  const image = document.createElement("img");
+  image.className = "card-img-top mt-3 rounded-circle";
+  image.src = album.cover_medium;
+  card.appendChild(image);
 
     const cardBody = document.createElement("div");
     cardBody.className = "card-body";
