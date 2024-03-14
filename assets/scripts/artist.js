@@ -7,7 +7,7 @@ const albumApi = "https://corsproxy.io/?https://api.deezer.com/album/";
 const artistApi = "https://corsproxy.io/?https://api.deezer.com/artist/";
 const searchApi = "https://striveschool-api.herokuapp.com/api/deezer/search?q=";
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVhZDUyMTJkN2IxMTAwMTkwZTZkY2IiLCJpYXQiOjE3MTAxNjg2MjcsImV4cCI6MTcxMTM3ODIyN30.Js9yWPVZ-_WVXu5nVOvuKTIW9yEyXbD3UJ5A-Deo6LA";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVhZDUyMTJkN2IxMTAwMTkwZTZkY2IiLCJpYXQiOjE3MTAxNjg2MjcsImV4cCI6MTcxMTM3ODIyN30.Js9yWPVZ-_WVXu5nVOvuKTIW9yEyXbD3UJ5A-Deo6LA";
 
 const init = async () => {
   const urlParams = new URLSearchParams(window.location.search);
@@ -31,7 +31,6 @@ const init = async () => {
     } else {
       console.error("Error: Invalid artist or tracks data.");
     }
-  }
 };
 
 const fetchArtistDetails = async (artistId) => {
@@ -136,18 +135,19 @@ const fetchArtistAlbums = async (artistId) => {
 };
 
 const formatDuration = (seconds) => {
-  const minutes = Math.floor(seconds / 60);
-  const remainingSeconds = seconds % 60;
-  const formattedSeconds =
-    remainingSeconds < 10 ? `0${remainingSeconds}` : remainingSeconds;
-  return `${minutes}:${formattedSeconds}`;
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    const formattedSeconds =
+        remainingSeconds < 10 ? `0${remainingSeconds}` : remainingSeconds;
+    return `${minutes}:${formattedSeconds}`;
 };
 
 const displayArtistDetails = (artist) => {
-  const artistNameElement = document.getElementById("artist-name");
-  const artistImageElement = document.getElementById("artist-image");
-  const artistFollowersElement = document.getElementById("artist-followers");
-  const artistAlbumsElement = document.getElementById("artist-albums");
+    const artistNameElement = document.getElementById("artist-name");
+    const artistImageElement = document.getElementById("artist-image");
+    const artistFollowersElement = document.getElementById("artist-followers");
+    const artistAlbumsElement = document.getElementById("artist-albums");
+
 
   if (artist) {
     artistNameElement.className = "display-3";
@@ -235,5 +235,5 @@ const displayAlbumsDetails = (albums) => {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  init();
+    init();
 });
