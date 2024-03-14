@@ -131,7 +131,7 @@ const loadRandomArtists = async () => {
 const createArtistCard = (artist) => {
   const card = document.createElement("div");
   card.className = "card col-2 mx-1 mb-4";
-  card.setAttribute("style", "width: 15rem");
+  card.setAttribute("style", "width: 10rem");
 
   const image = document.createElement("img");
   image.src = artist.picture_big;
@@ -161,7 +161,7 @@ const createArtistCard = (artist) => {
 const createAlbumCard = (album) => {
   const card = document.createElement("div");
   card.className = "card col-2 mx-1 mb-4";
-  card.setAttribute("style", "width: 15 rem");
+  card.setAttribute("style", "width: 10 rem");
 
   const image = document.createElement("img");
   image.src = album.cover_xl;
@@ -252,7 +252,7 @@ const loadRandomTracks = async (artistId) => {
 const cardTracks = (album, artist) => {
   const card = document.createElement("div");
   card.className = "card col-2 mx-1 mb-4 text-center cardColor ";
-  card.setAttribute("style", "width: 15rem");
+  card.setAttribute("style", "width: 13rem");
 
   const image = document.createElement("img");
   image.className = "card-img-top mt-3 rounded-circle";
