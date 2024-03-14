@@ -356,7 +356,7 @@ const createResultElement = (result) => {
   resultDiv.classList.add("row", "d-flex", "result");
 
   const albumCoverDiv = document.createElement("div");
-  albumCoverDiv.classList.add("col-5");
+  albumCoverDiv.classList.add("col-4");
   const albumCoverImg = document.createElement("img");
   albumCoverImg.src = album.cover_xl;
   albumCoverImg.alt = `${album.title} Cover`;
@@ -386,7 +386,7 @@ const createResultElement = (result) => {
   albumLink.textContent = `Album: ${album.title}`;
 
   const trackLink = document.createElement("a");
-  trackLink.className = "text-decoration-none text-success ";
+  trackLink.className = "text-decoration-none text-white ";
   trackLink.href = link;
   trackLink.textContent = "Open Track";
 
