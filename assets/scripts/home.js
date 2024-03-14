@@ -185,6 +185,10 @@ const createAlbumCard = (album) => {
   const card = document.createElement("div");
   card.className = "card col-2 mx-1 mb-4 text-center";
   card.setAttribute("style", "width: 10 rem");
+  card.addEventListener("click", () => {
+    window.location.href = `album.html?albumId=${album.id}`;
+  });
+
 
   const image = document.createElement("img");
   image.src = album.cover_medium;
@@ -196,6 +200,7 @@ const createAlbumCard = (album) => {
   const title = document.createElement("h5");
   title.innerText = album.title;
   title.className = "card-title overfooter grandezza";
+
 
   card.appendChild(image);
   cardBody.append(title);
