@@ -183,8 +183,8 @@ const createArtistCard = (artist) => {
 
 const createAlbumCard = (album) => {
   const card = document.createElement("div");
-  card.className = "card col-2 mx-1 mb-4 text-center";
-  card.setAttribute("style", "width: 10 rem");
+  card.className = "card col-2 mx-1 mb-4 text-center overfooter";
+  card.setAttribute("style", "width: 10rem");
   card.addEventListener("click", () => {
     window.location.href = `album.html?albumId=${album.id}`;
   });
@@ -199,7 +199,7 @@ const createAlbumCard = (album) => {
 
   const title = document.createElement("h5");
   title.innerText = album.title;
-  title.className = "card-title overfooter grandezza";
+  title.className = "card-title  grandezza";
 
 
   card.appendChild(image);
