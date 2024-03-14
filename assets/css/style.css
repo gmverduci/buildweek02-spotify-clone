@@ -15,20 +15,26 @@ padding: 4px 10px;
 }
 
 .finto-footer{
-    height:84vh;
+    height:82vh;
 }
 .overfooter:hover{
     scale: 1.3;
     opacity:1;
-    color: white;
+    color: white ;
+    cursor: pointer;
     
 }
+
+
+
 
 .posizione{
     top: 0;
 }
 
-
+.textbluu{
+    color: #032e3f;
+}
 .cardColor{
     background: #082200;
 background: -moz-radial-gradient(center, #082200 0%, #000000 17%, #A2792E 100%);
