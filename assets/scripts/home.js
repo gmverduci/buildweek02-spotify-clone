@@ -69,30 +69,57 @@ const fetchRandomArtist = async () => {
     return JSON.parse(cachedArtists);
   }
 
-  const randomArtist = artists[Math.floor(Math.random() * artists.length)];
+  const fetchedArtists = []; 
+
+  const randomArtistId = () => {
+    const randomIndex = Math.floor(Math.random() * artists.length);
+    return artists[randomIndex];
+  };
+
+  const fetchArtist = async (artistId) => {
+    try {
+      const response = await fetch(`${artistApi}${artistId}`, {
+        method: "GET",
+      });
+      if (!response.ok) {
+        console.error(`Error fetching artist: ${response.statusText}`);
+        return null;
+      }
+      const contentType = response.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        console.error("Non-JSON response received");
+        return null;
+      }
+      const artist = await response.json();
+      artist.id = artistId;
+      return artist;
+    } catch (error) {
+      console.error("Error fetching artist:", error);
+      return null;
+    }
+  };
+
+  const fetchUniqueArtist = async () => {
+    let artistId = randomArtistId();
+    while (fetchedArtists.includes(artistId)) {
+      
+      artistId = randomArtistId();
+    }
+    fetchedArtists.push(artistId); 
+    const artist = await fetchArtist(artistId);
+    return artist;
+  };
+
   try {
     await delay(0);
-
-    const response = await fetch(`${artistApi}${randomArtist}`, {
-      method: "GET",
-    });
-    if (!response.ok) {
-      console.error(`Error fetching artist: ${response.statusText}`);
-      return null;
-    }
-    const contentType = response.headers.get("content-type");
-    if (!contentType || !contentType.includes("application/json")) {
-      console.error("Non-JSON response received");
-      return null;
-    }
-    const artist = await response.json();
-    artist.id = randomArtist;
+    const artist = await fetchUniqueArtist();
     return artist;
   } catch (error) {
     console.error("Error fetching artist:", error);
     return null;
   }
 };
+
 
 
 const loadRandomArtists = async () => {
