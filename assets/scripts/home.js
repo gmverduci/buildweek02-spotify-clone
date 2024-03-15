@@ -159,9 +159,7 @@ const createArtistCard = (artist) => {
     window.location.href = `artist.html?artistId=${artist.id}`;
   });
 
-  const text = document.createElement("p");
-  text.className = "card-text text-success";
-  text.innerText = "Artista";
+
 
   const button = document.createElement("button");
   button.type = "button";
@@ -175,7 +173,7 @@ const createArtistCard = (artist) => {
 
   card.appendChild(image); 
    card.appendChild(button);
-  cardBody.append(name, text); 
+  cardBody.append(name); 
   card.appendChild(cardBody);
 
   return card;
