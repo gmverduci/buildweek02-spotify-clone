@@ -55,9 +55,9 @@ const init = async () => {
     tracksCardContainer.innerHTML = "";
     allTracks.forEach((track) => {
       console.log(track.album);
-      const tracks = cardTracks(track.album, track.artist);
+      const trackCard = cardTracks(track);
       console.log(allTracks);
-      tracksCardContainer.appendChild(tracks);
+      tracksCardContainer.appendChild(trackCard);
     });
   } catch (error) {
     console.error("Initialization error", error);
@@ -275,32 +275,36 @@ const loadRandomTracks = async (artistId) => {
   }
 };
 
-const cardTracks = (album, artist) => {
-  const card = document.createElement("div");
-  card.className = "card col-2 mx-1 mb-4 text-center cardColor ";
-  card.setAttribute("style", "width: 10rem");
+const cardTracks = (track) => {
+    const card = document.createElement("div");
+    card.className = "card col-2 mx-1 mb-4 text-center cardColor ";
+    card.setAttribute("style", "width: 10rem");
 
-  const image = document.createElement("img");
-  image.className = "card-img-top mt-3 rounded-circle";
-  image.src = album.cover_medium;
-  card.appendChild(image);
+    const image = document.createElement("img");
+    image.className = "card-img-top mt-3 rounded-circle";
+    image.src = track.album.cover_medium;
+    card.appendChild(image);
 
-  const cardBody = document.createElement("div");
-  cardBody.className = "card-body";
+    const cardBody = document.createElement("div");
+    cardBody.className = "card-body";
 
-  const name = document.createElement("h5");
-  name.className = "card-title overfooter grandezza ";
-  name.innerText = album.title;
-  cardBody.appendChild(name);
+    const name = document.createElement("h5");
+    name.className = "card-title overfooter grandezza ";
+    name.innerText = track.title;
+    cardBody.appendChild(name);
 
-  const text = document.createElement("p");
-  text.className = "card-text  textbluu fw-bold";
-  text.innerText = artist.name;
-  cardBody.appendChild(text);
+    const text = document.createElement("p");
+    text.className = "card-text  textbluu fw-bold";
+    text.innerText = track.artist.name;
+    cardBody.appendChild(text);
 
-  card.appendChild(cardBody);
+    card.appendChild(cardBody);
 
-  return card;
+    card.addEventListener("click", function() {
+        playTrack(track);
+    });
+
+    return card;
 };
 
 const searchForm = document.getElementById("search-form");
@@ -425,16 +429,163 @@ const createResultElement = (result) => {
   resultDiv.appendChild(infoDiv);
 
   searchContainer.appendChild(resultDiv);
-
-
-
-
   
   return searchContainer;
 
+};
+
+const audioElement = new Audio();
+let isPlaying = false;
+let currentTrackIndex = 0;
+let updateTimer;
+
+const setTrack = (index) => {
+    const allTracks = JSON.parse(localStorage.getItem(tracksCache));
+
+    if (!allTracks || allTracks.length === 0 || !allTracks[index]) {
+        console.error("No track available");
+        return;
+    }
+
+    const track = allTracks[index];
+
+    if (!track.preview) {
+        console.error("Track preview URL is missing");
+        return;
+    }
+
+    audioElement.src = track.preview;
+    currentTrackIndex = index;
+
+    if (updateTimer) {
+        clearInterval(updateTimer);
+    }
+
+    document.getElementById('track-title').innerText = track.title || "Unknown Title";
+    document.getElementById('track-artist').innerText = track.artist.name || "Unknown Artist";
+    document.getElementById('progress-bar').value = 0;
+    document.getElementById('current-time').innerText = '0:00';
+    document.getElementById('total-duration').innerText = formatTime(audioElement.duration);
+
+    updateTimer = setInterval(seekUpdate, 1000);
+    audioElement.onloadedmetadata = () => {
+        document.getElementById('total-duration').innerText = formatTime(audioElement.duration);
+    }
+
+    if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+    }
+
+    audioElement.onloadedmetadata = () => {
+        document.getElementById('total-duration').innerText = formatTime(audioElement.duration);
+        seekUpdate();
+    }
+
+    playTrack(track.preview);
+
+}
+
+document.getElementById('progress-bar').addEventListener('input', (event) => {
+    audioElement.currentTime = event.target.value;
+})
+
+document.getElementById('volume-control').addEventListener('input', (event) => {
+    audioElement.volume = event.target.value;
+});
+
+const togglePlayPause = () => {
+    if (isPlaying) {
+        audioElement.pause();
+        cancelAnimationFrame(animationFrameId);
+    } else {
+        audioElement.play().catch((error) => console.error("Error playing track:", error));
+        seekUpdate();
+    }
+
+    isPlaying = !isPlaying;
+    updatePlayPauseButton();
+}
+
+const playTrack = (track) => {
+    if (!track || !track.preview) {
+        console.error("Track URL is missing");
+        return;
+    }
+
+    audioElement.src = track.preview;
+    audioElement.play().catch(error => console.error("Error playing the track:", error));
+
+    isPlaying = true;
+    updatePlayPauseButton();
+
+    document.getElementById('track-title').innerText = track.title || "Unknown Title";
+    document.getElementById('track-artist').innerText = track.artist && track.artist.name ? track.artist.name : "Unknown Artist";
+
+    if (updateTimer) {
+        clearInterval(updateTimer);
+    }
+
+    updateTimer = setInterval(seekUpdate, 1000);
+    audioElement.onloadedmetadata = () => {
+        document.getElementById('total-duration').innerText = formatTime(audioElement.duration);
+        seekUpdate();
+    }
 
 };
 
-document.addEventListener("DOMContentLoaded", init);
+const playNextTrack = () => {
+    currentTrackIndex = (currentTrackIndex + 1) % JSON.parse(localStorage.getItem(tracksCache)).length;
+    setTrack(currentTrackIndex);
 
+    if (isPlaying) {
+        audioElement.play();
+    }
+}
 
+const playPreviousTrack = () => {
+    currentTrackIndex = (currentTrackIndex - 1) % JSON.parse(localStorage.getItem(tracksCache)).length;
+    setTrack(currentTrackIndex);
+
+    if (isPlaying) {
+        audioElement.play();
+    }
+}
+
+const updatePlayPauseButton = () => {
+    const playPauseButton = document.getElementById('play-pause');
+    playPauseButton.innerHTML = isPlaying ? '<i class="bi bi-pause-fill"></i>' : '<i class="bi bi-play-fill"></i>';
+}
+
+let animationFrameId;
+
+const seekUpdate = () => {
+    let current = audioElement.currentTime;
+    let duration = audioElement.duration;
+
+    if (!isNaN(duration)) {
+        document.getElementById('progress-bar').max = duration;
+        document.getElementById('progress-bar').value = current;
+        document.getElementById('current-time').innerText = formatTime(current);
+    }
+
+    animationFrameId = requestAnimationFrame(seekUpdate);
+}
+
+const formatTime = (seconds) => {
+    let min = Math.floor(seconds / 60);
+    let sec = Math.floor(seconds % 60);
+    return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+}
+
+audioElement.onended = () => {
+    cancelAnimationFrame(animationFrameId);
+    playNextTrack();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    init();
+    setTrack(currentTrackIndex);
+    document.getElementById('prev').addEventListener('click', playPreviousTrack);
+    document.getElementById('play-pause').addEventListener('click', togglePlayPause);
+    document.getElementById('next').addEventListener('click', playNextTrack);
+});
