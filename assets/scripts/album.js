@@ -117,4 +117,31 @@ const formatDuration = (durationInSeconds) => {
 
 document.addEventListener("DOMContentLoaded", () => {
   init();
+
+  const prevButton = document.getElementById("button-prev");
+  const nextButton = document.getElementById("button-next");
+
+  prevButton.addEventListener("click", () => {
+    changeAlbum(-1);
+  });
+
+  nextButton.addEventListener("click", () => {
+    changeAlbum(1);
+  });
 });
+
+const changeAlbum = (increment) => {
+  const urlParams = new URLSearchParams(window.location.search);
+  let albumId = urlParams.get("albumId");
+
+  if (albumId) {
+    albumId = parseInt(albumId) + increment;
+    const newUrl =
+      window.location.origin +
+      window.location.pathname +
+      `?albumId=${albumId}`;
+    window.history.pushState({ path: newUrl }, "", newUrl);
+
+    init();
+  }
+};
