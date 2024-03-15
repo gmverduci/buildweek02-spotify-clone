@@ -259,6 +259,7 @@ const loadRandomTracks = async (artistId) => {
       return null;
     }
     const data = await response.json();
+    console.log('DATSAAAAA: '+ data.data)
     if (data.data.length > 0) {
       const randomIndex = Math.floor(Math.random() * data.data.length);
       const track = data.data[randomIndex];
@@ -608,3 +609,5 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('play-pause').addEventListener('click', togglePlayPause);
     document.getElementById('next').addEventListener('click', playNextTrack);
 });
+
+
