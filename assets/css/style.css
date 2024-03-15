@@ -36,11 +36,20 @@ padding: 4px 10px;
     cursor: pointer;
     
 }
+.pos-volume{
+    position: absolute;
+    right: 50px;
+    top: 20px;
+}
 
-/* .altezza{
-    height:26vh; 
-} */
-
+.larg-traccia{
+    width: 500px;
+}
+.ciao{
+    position: fixed;
+    bottom: 0;
+    background-color: black;
+width: 100%;}
 .posizione{
     top: 0;
 }
