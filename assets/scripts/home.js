@@ -13,7 +13,7 @@ const artists = [
   1379, 637, 405, 415, 1154, 849, 868, 663, 847, 3307, 3350, 817, 808, 1723,
   687, 5292, 820, 1032, 239, 2048, 2799, 1658, 9052, 2025, 3, 2, 2519, 1309, 2449, 1342, 2059, 2337, 617, 997, 
 ];
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+// const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const init = async () => {
   localStorage.clear();
@@ -111,7 +111,7 @@ const fetchRandomArtist = async () => {
   };
 
   try {
-    await delay(0);
+    // await delay(0);
     const artist = await fetchUniqueArtist();
     return artist;
   } catch (error) {
@@ -235,7 +235,7 @@ const createAlbumCard = (album) => {
 
 const loadRandomAlbums = async (artistName) => {
   try {
-    await delay(0);
+    // await delay(0);
 
     const response = await fetch(`${searchApi}${artistName}`, {
       method: "GET",
@@ -271,7 +271,7 @@ const loadRandomAlbums = async (artistName) => {
 
 const loadRandomTracks = async (artistId) => {
   try {
-    await delay(0);
+    // await delay(0);
 
     const response = await fetch(`${trackApi}${artistId}/top?limit=10`, {
       method: "GET",
