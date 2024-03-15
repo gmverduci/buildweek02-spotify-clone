@@ -311,6 +311,26 @@ const searchInput = document.getElementById("search-input");
 const mainContainer = document.getElementById("main-container");
 const searchButton = document.getElementById("search-button");
 
+const invisibile = document.getElementById("invisibile");
+const invisibile1 = document.getElementById("invisibile1");
+const invisibile2 = document.getElementById("invisibile2");
+const invisibile3 = document.getElementById("invisibile3");
+
+searchInput.addEventListener("click", () => {
+  invisibile.style.display = "none";
+  invisibile1.style.display = "none";
+  invisibile2.style.display = "none";
+  invisibile3.style.display = "none";
+  const searchImg = document.createElement("div");
+  searchImg.classList.add("search-height");
+
+  searchImg.style.background = "url('../assets/img-generi/generi.png')";
+  searchImg.style.height = "700px";
+  searchImg.style.marginTop = "50px";
+
+  mainContainer.appendChild(searchImg);
+});
+
 searchForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
