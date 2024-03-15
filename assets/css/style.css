@@ -1,3 +1,4 @@
+
 body{
     background-color: black;
 
@@ -29,7 +30,7 @@ padding: 4px 10px;
     font-size: .6em;
 }
 .finto-footer{
-    height:82vh;
+    height:78vh;
 }
 .overfooter:hover{
     scale: 1.1;
@@ -53,8 +54,11 @@ padding: 4px 10px;
     top: 20px;
 }
 
+
+
 .larg-traccia{
     width: 500px;
+    
 }
 .ciao{
     position: fixed;
@@ -64,6 +68,12 @@ width: 100%;}
 .posizione{
     top: 0;
 }
+
+#volume-control{
+    color: red !important;
+background-color: red!important
+;
+} 
 
 .textbluu{
     color: #032e3f;

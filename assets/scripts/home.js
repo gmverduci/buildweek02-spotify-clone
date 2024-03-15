@@ -304,7 +304,7 @@ const loadRandomTracks = async (artistId) => {
 
 const cardTracks = (track) => {
     const card = document.createElement("div");
-    card.className = "card col-2 mx-1 mb-4 text-center cardColor ";
+    card.className = "card col-2 mx-1 mb-4 text-center cardColor overfooter";
     card.setAttribute("style", "width: 10rem");
 
     const image = document.createElement("img");
@@ -316,7 +316,7 @@ const cardTracks = (track) => {
     cardBody.className = "card-body";
 
     const name = document.createElement("h5");
-    name.className = "card-title overfooter grandezza ";
+    name.className = "card-title  grandezza ";
     name.innerText = track.title;
     cardBody.appendChild(name);
 

@@ -77,7 +77,7 @@ const populateAlbumDetails = (album) => {
   album.tracks.data.forEach((track, index) => {
     const row = document.createElement("tr");
     const trackLink = document.createElement("a");
-    trackLink.classList.add("btn", "td-none");
+    trackLink.classList.add("btn", "td-none","overfooter");
     trackLink.textContent = track.title;
     trackLink.href = "javascript:void(0);";
     trackLink.addEventListener("click", () => {

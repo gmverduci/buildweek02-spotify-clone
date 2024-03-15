@@ -189,7 +189,7 @@ const displayTracksDetails = (tracks) => {
 
     const playPauseButton = document.createElement("button");
     playPauseButton.className =
-      "btn btn-sm btn-outline-primary ms-2 play-pause-btn";
+      "btn btn-sm text-success ms-2 play-pause-btn";
     playPauseButton.innerHTML = '<i class="bi bi-play-fill"></i>';
     playPauseButton.setAttribute("data-track-id", `track-${index + 1}`);
 
