@@ -98,3 +98,7 @@ position: static;
     margin-top: 50px !important;
     cursor: pointer;
 }
+
+.card {
+    cursor: pointer;
+}
