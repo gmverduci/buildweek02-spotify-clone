@@ -2,6 +2,17 @@ body{
     background-color: black;
 
 }
+nav .libreria{
+    background-color: #141414 !important;
+}
+
+ #accedi{
+    background-color: #101010 !important;
+ }
+
+ .mainColor{
+    background: linear-gradient(to bottom, #1e1e1e, #181818);
+ }
 .grandezza{
 font-size: .8em ;
 }
@@ -99,7 +110,9 @@ position: fixed;
 .fix,.abs{
 position: static;
 }
-
+.larg-traccia{
+    width: 300px;
+}
 
 }
 
