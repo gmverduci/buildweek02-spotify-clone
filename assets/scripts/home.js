@@ -141,19 +141,19 @@ const loadRandomArtists = async () => {
 
 const createArtistCard = (artist) => {
   const card = document.createElement("div");
-  card.className = "card col-2 mx-1 mb-4 text-center altezza";
+  card.className = "card col-2 mx-1 mb-4 text-center altezza p-3 position-relative";
   card.setAttribute("style", "width: 10rem");
 
   const image = document.createElement("img");
   image.src = artist.picture_big;
-  image.className = "card-img-top mt-3 rounded-circle";
+  image.className = "card-img-top my-3 m rounded-circle";
 
   const cardBody = document.createElement("div");
-  cardBody.className = "card-body pt-0";
+  cardBody.className = "card-body p-0";
 
   const name = document.createElement("h5");
   name.innerHTML = artist.name;
-  name.className = "card-title overfooter grandezza mb-0 lh-1";
+  name.className = "card-title overfooter fs-7 mb-0 pb-1 lh-1";
   name.addEventListener("click", () => {
     window.location.href = `artist.html?artistId=${artist.id}`;
   });
@@ -162,7 +162,7 @@ const createArtistCard = (artist) => {
 
   const button = document.createElement("button");
   button.type = "button";
-  button.className = "rounded-5 btn text-success fs-3 ";
+  button.className = "rounded-5 btn text-success fs-3 position-absolute end-0";
   button.innerHTML = '<i class="bi bi-play-circle"></i>';
 
 
