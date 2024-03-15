@@ -12,7 +12,8 @@ const token =
 const artists = [
   719, 275373, 11, 13, 3381, 2468, 1005, 412, 848, 927, 636, 210, 176, 115, 863,
   1379, 637, 405, 415, 1154, 849, 868, 663, 847, 3307, 3350, 817, 808, 1723,
-  687, 5292, 820, 1032, 239, 2048, 2799, 1658, 9052, 2025, 3, 2, 2519, 1309, 2449, 1342, 2059, 2337, 617, 997, 
+  687, 5292, 820, 1032, 239, 2048, 2799, 1658, 9052, 2025, 3, 2, 2519, 1309,
+  2449, 1342, 2059, 2337, 617, 997,
 ];
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -95,7 +96,6 @@ const fetchRandomArtist = async () => {
   }
 };
 
-
 const loadRandomArtists = async () => {
   let fetchedArtists = [];
   const selectedArtistIds = new Set();
@@ -114,7 +114,9 @@ const loadRandomArtists = async () => {
   }
 
   const artistsContainer1 = document.getElementById("container-cards-artista");
-  const artistsContainer2 = document.getElementById("container-cards-artista-2");
+  const artistsContainer2 = document.getElementById(
+    "container-cards-artista-2"
+  );
   artistsContainer1.innerHTML = "";
   artistsContainer2.innerHTML = "";
 
@@ -168,14 +170,11 @@ const createArtistCard = (artist) => {
   button.className = "rounded-5 btn text-success fs-3 ";
   button.innerHTML = '<i class="bi bi-play-circle"></i>';
 
+  button.addEventListener("click", () => {});
 
-  button.addEventListener("click", () => {
-
-  });
-
-  card.appendChild(image); 
-   card.appendChild(button);
-  cardBody.append(name, text); 
+  card.appendChild(image);
+  card.appendChild(button);
+  cardBody.append(name, text);
   card.appendChild(cardBody);
 
   return card;
@@ -189,7 +188,6 @@ const createAlbumCard = (album) => {
     window.location.href = `album.html?albumId=${album.id}`;
   });
 
-
   const image = document.createElement("img");
   image.src = album.cover_medium;
   image.className = "card-img-top mt-3 ";
@@ -200,7 +198,6 @@ const createAlbumCard = (album) => {
   const title = document.createElement("h5");
   title.innerText = album.title;
   title.className = "card-title  grandezza";
-
 
   card.appendChild(image);
   cardBody.append(title);
@@ -228,7 +225,7 @@ const loadRandomAlbums = async (artistName) => {
     const data = await response.json();
     let albums = [];
     data.data.forEach((index) => albums.push(index.album));
-    console.log('Albums:', albums)
+    console.log("Albums:", albums);
 
     if (albums.length > 0) {
       const randomIndex = Math.floor(Math.random() * albums.length);
@@ -310,6 +307,26 @@ const searchInput = document.getElementById("search-input");
 const mainContainer = document.getElementById("main-container");
 const searchButton = document.getElementById("search-button");
 
+const invisibile = document.getElementById("invisibile");
+const invisibile1 = document.getElementById("invisibile1");
+const invisibile2 = document.getElementById("invisibile2");
+const invisibile3 = document.getElementById("invisibile3");
+
+searchInput.addEventListener("click", () => {
+  invisibile.style.display = "none";
+  invisibile1.style.display = "none";
+  invisibile2.style.display = "none";
+  invisibile3.style.display = "none";
+  const searchImg = document.createElement("div");
+  searchImg.classList.add("search-height");
+
+  searchImg.style.background = "url('../assets/img-genere/generi.png')";
+  searchImg.style.height = "700px";
+  searchImg.style.marginTop = "50px";
+
+  mainContainer.appendChild(searchImg);
+});
+
 searchForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
@@ -378,7 +395,6 @@ const createResultElement = (result) => {
 
   const searchContainer = document.createElement("div");
   searchContainer.classList.add("container-fluid", "p-3");
-  
 
   const resultDiv = document.createElement("div");
   resultDiv.classList.add("row", "d-flex", "result");
@@ -388,16 +404,11 @@ const createResultElement = (result) => {
   const albumCoverImg = document.createElement("img");
   albumCoverImg.src = album.cover_medium;
   albumCoverImg.alt = `${album.title} Cover`;
-  albumCoverImg.classList.add("img-fluid", "rounded" );
+  albumCoverImg.classList.add("img-fluid", "rounded");
   albumCoverDiv.appendChild(albumCoverImg);
- 
+
   const infoDiv = document.createElement("div");
-  infoDiv.classList.add(
-    "col-6",
-    "d-flex",
-    "flex-column",
-    "ms-5"
-  );
+  infoDiv.classList.add("col-6", "d-flex", "flex-column", "ms-5");
 
   const titleElement = document.createElement("h4");
   titleElement.className = "overfooter";
@@ -428,15 +439,7 @@ const createResultElement = (result) => {
 
   searchContainer.appendChild(resultDiv);
 
-
-
-
-  
   return searchContainer;
-
-
 };
 
 document.addEventListener("DOMContentLoaded", init);
-
-
