@@ -154,7 +154,7 @@ const createArtistCard = (artist) => {
 
   const name = document.createElement("h5");
   name.innerHTML = artist.name;
-  name.className = "card-title overfooter grandezza mb-0 lh-1";
+  name.className = "card-title overfooter grandezza-btn grandezza mb-0 lh-1";
   name.addEventListener("click", () => {
     window.location.href = `artist.html?artistId=${artist.id}`;
   });
