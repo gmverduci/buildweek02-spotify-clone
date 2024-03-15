@@ -2,7 +2,6 @@ const artistsCache = "cachedArtists";
 const albumCache = "cachedAlbums";
 const tracksCache = "cachedTracks";
 const trackApi = "https://striveschool-api.herokuapp.com/api/deezer/artist/";
-
 const albumApi = "https://corsproxy.io/?https://api.deezer.com/album/";
 const artistApi = "https://corsproxy.io/?https://api.deezer.com/artist/";
 const searchApi = "https://striveschool-api.herokuapp.com/api/deezer/search?q=";

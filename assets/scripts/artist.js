@@ -8,6 +8,8 @@ const artistApi = "https://corsproxy.io/?https://api.deezer.com/artist/";
 const searchApi = "https://striveschool-api.herokuapp.com/api/deezer/search?q=";
 const token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVhZDUyMTJkN2IxMTAwMTkwZTZkY2IiLCJpYXQiOjE3MTAxNjg2MjcsImV4cCI6MTcxMTM3ODIyN30.Js9yWPVZ-_WVXu5nVOvuKTIW9yEyXbD3UJ5A-Deo6LA";
+let currentTrackIndex = 0;
+let tracks = []; 
 
 const init = async () => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -15,18 +17,18 @@ const init = async () => {
 
     if (artistId) {
         const artist = await fetchArtistDetails(artistId);
-        const tracks = await fetchArtistTracks(artistId);
+        const trackss = await fetchArtistTracks(artistId);
         const albums = await fetchArtistAlbums(artistId);
 
         if (
             artist &&
-            tracks &&
+            trackss &&
             albums &&
-            Array.isArray(tracks.data) &&
-            tracks.data.length >= 3
+            Array.isArray(trackss.data) &&
+            trackss.data.length >= 3
         ) {
             displayArtistDetails(artist);
-            displayTracksDetails(tracks);
+            displayTracksDetails(trackss);
             displayAlbumsDetails(albums);
         } else {
             console.error("Error: Invalid artist or tracks data.");
@@ -76,12 +78,13 @@ const fetchArtistTracks = async (artistId) => {
         const response = await fetch(`${trackApi}${artistId}/top?limit=3`, {
             method: "GET",
         });
-        const tracks = await response.json();
-        console.log("Tracks from API:", tracks);
+        const fetchedTracks = await response.json();
+        console.log("Tracks from API:", fetchedTracks.data);
 
-        if (tracks && Array.isArray(tracks.data) && tracks.data.length >= 3) {
-            localStorage.setItem(`Tracks-${artistId}`, JSON.stringify(tracks));
-            return tracks;
+        if (fetchedTracks && Array.isArray(fetchedTracks.data) && fetchedTracks.data.length >= 3) {
+            tracks = fetchedTracks.data;
+            localStorage.setItem(`Tracks-${artistId}`, JSON.stringify(fetchedTracks));
+            return fetchedTracks;
         } else {
             console.error("Error: Invalid tracks data format or length.");
             return null;
@@ -170,11 +173,11 @@ const displayArtistDetails = (artist) => {
 let currentPlayingTrack = null;
 
 const displayTracksDetails = (tracks) => {
-    for (let i = 0; i < tracks.data.length; i++) {
-        const track = tracks.data[i];
-        const songElement = document.getElementById(`song-${i + 1}`);
-        const albumElement = document.getElementById(`track-album-${i + 1}`);
-        const durationElement = document.getElementById(`duration-${i + 1}`);
+    tracks.data.forEach((track, index) =>  {
+        track.index = index;
+        const songElement = document.getElementById(`song-${index + 1}`);
+        const albumElement = document.getElementById(`track-album-${index + 1}`);
+        const durationElement = document.getElementById(`duration-${index + 1}`);
 
         songElement.textContent = track.title;
         albumElement.innerHTML = `<i class="bi bi-e-square"></i> ${track.album.title}`;
@@ -183,7 +186,7 @@ const displayTracksDetails = (tracks) => {
         const playPauseButton = document.createElement("button");
         playPauseButton.className = "btn btn-sm btn-outline-primary ms-2 play-pause-btn";
         playPauseButton.innerHTML = '<i class="bi bi-play-fill"></i>';
-        playPauseButton.setAttribute("data-track-id", `track-${i + 1}`);
+        playPauseButton.setAttribute("data-track-id", `track-${index + 1}`);
 
         durationElement.parentNode.insertBefore(playPauseButton, durationElement.nextSibling);
 
@@ -199,19 +202,19 @@ const displayTracksDetails = (tracks) => {
                     document.querySelector('.bi-pause-fill').parentNode.innerHTML = '<i class="bi bi-play-fill"></i>';
                 }
 
-                playTrack(track); // Pass the entire track object
+                playTrack(track);
                 currentPlayingTrack = trackId;
                 this.innerHTML = '<i class="bi bi-pause-fill"></i>';
             }
         });
-    }
+    })
 };
 
 let currentAudio = null;
 
 const playTrack = (track) => {
-    if (!track.preview) {
-        console.error("Track preview URL is missing");
+    if (!track || !track.preview) {
+        console.error("Track object is undefined or missing preview URL");
         return;
     }
 
@@ -220,32 +223,66 @@ const playTrack = (track) => {
         currentAudio.currentTime = 0;
     }
 
-    updatePlayerInfo(track);
-
     currentAudio = new Audio(track.preview);
     currentAudio.addEventListener('timeupdate', updateProgress);
     currentAudio.addEventListener('ended', resetPlayer);
 
+    document.getElementById('volume-control').addEventListener('input', function() {
+        currentAudio.volume = this.value;
+    });
+
+    updatePlayerInfo(track);
+
     currentAudio.play().catch(error => console.error("Error playing the track:", error));
+};
+
+const playNextTrack = () => {
+    currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
+    const nextTrack = tracks[currentTrackIndex];
+    if (nextTrack) {
+        playTrack(nextTrack);
+    }
+};
+
+const playPreviousTrack = () => {
+    currentTrackIndex = currentTrackIndex - 1 < 0 ? tracks.length - 1 : currentTrackIndex - 1;
+    const prevTrack = tracks[currentTrackIndex];
+    if (prevTrack) {
+        playTrack(prevTrack);
+    }
 };
 
 const updatePlayerInfo = (track) => {
     document.getElementById('track-title').textContent = track.title;
     document.getElementById('track-artist').textContent = track.artist.name;
     document.getElementById('total-duration').textContent = formatDuration(track.duration);
-    document.getElementById('play-pause').innerHTML = '<i class="bi bi-pause-fill"></i>';
+
+    const playPauseButton = document.getElementById('play-pause');
+    playPauseButton.innerHTML = '<i class="bi bi-pause-fill"></i>';
+    playPauseButton.onclick = () => {
+        if (currentAudio.paused) {
+            currentAudio.play();
+            playPauseButton.innerHTML = '<i class="bi bi-pause-fill"></i>';
+        } else {
+            currentAudio.pause();
+            playPauseButton.innerHTML = '<i class="bi bi-play-fill"></i>';
+        }
+    };
 };
 
 const updateProgress = () => {
     if (!currentAudio) return;
     const progressBar = document.getElementById('progress-bar');
     const currentTimeElement = document.getElementById('current-time');
-    const duration = currentAudio.duration;
-    const currentTime = currentAudio.currentTime;
-    const progressValue = (currentTime / duration) * 100;
-    
+    const progressValue = (currentAudio.currentTime / currentAudio.duration) * 100;
+
     progressBar.value = progressValue;
-    currentTimeElement.textContent = formatDuration(Math.floor(currentTime));
+    currentTimeElement.textContent = formatDuration(Math.floor(currentAudio.currentTime));
+
+    progressBar.addEventListener('input', () => {
+        const seekTime = (progressBar.value / 100) * currentAudio.duration;
+        currentAudio.currentTime = seekTime;
+    });
 };
 
 const resetPlayer = () => {
@@ -292,6 +329,9 @@ const displayAlbumsDetails = (albums) => {
 
 document.addEventListener("DOMContentLoaded", () => {
     init();
+    
+    document.getElementById('prev').addEventListener('click', playPreviousTrack);
+    document.getElementById('next').addEventListener('click', playNextTrack);
 
     const prevButton = document.getElementById("button-prev");
     const nextButton = document.getElementById("button-next");
@@ -320,4 +360,3 @@ const changeArtist = (increment) => {
         init();
     }
 }
-
