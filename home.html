@@ -202,7 +202,7 @@
                             <a href="#" class=" text-decoration-none text-white  ">Mostra tutto</a>
                         </div>
 
-                        <div class="container mt-3 ms-5">
+                        <div class="container mt-3 ms-4">
                             <div class="row d-flex " id="container-cards-album">
 
                             </div>
@@ -228,29 +228,8 @@
 
                 </div>
 
-                <div
-                    class="player-controls bg-body-tertiary p-2 fixed-bottom d-flex justify-content-center align-items-center">
-                    <button id="prev" class="btn btn-sm btn-outline-secondary"><i
-                            class="bi bi-skip-start-fill"></i></button>
-                    <button id="play-pause" class="btn btn-sm btn-outline-primary mx-2"><i
-                            class="bi bi-play-fill"></i></button>
-                    <button id="next" class="btn btn-sm btn-outline-secondary"><i
-                            class="bi bi-skip-end-fill"></i></button>
-                    <div class="player-info">
-                        <span id="track-title" class="track-title"></span> - 
-                        <span id="track-artist" class="track-artist"></span>
-                    </div>
-                    <div class="track-progress d-flex align-items-center w-100 mx-3">
-                        <small id="current-time">0:00</small>
-                        <input type="range" id="progress-bar" class="mx-2" value="0" style="flex-grow: 1;">
-                        <small id="total-duration">0:00</small>
-                    </div>
-                    <div class="volume-controls d-flex align-items-center">
-                        <i class="bi bi-volume-down-fill"></i>
-                        <input type="range" id="volume-control" class="mx-2" min="0" max="1" step="0.01" value="1">
-                        <i class="bi bi-volume-up-fill"></i>
-                    </div>
-                </div>
+               
+              
 
                 <footer id="invisibile3">
                     <div class="container text-secondary mt-5 d-flex flex-column flex-md-row">
@@ -332,7 +311,48 @@
             </div>
         </div>
     </div>
-
+ <div class="container-fluid">
+     
+                    <div class="player-controls p-2 ciao d-flex justify-content-center ">
+                      <div class="d-flex justify-content-between ">
+                        <div class="start-0 position-absolute" id="avatar-player"><img src="assets/img/main/image-1.jpg" width="50" alt=""></div>
+                          <div class="d-flex flex-column justify-content-center align-items-center">
+                           <div>
+                          <button id="prev" class="btn btn-sm ">
+                            <i class="bi bi-skip-start-fill"></i>
+                          </button>
+                          <button id="play-pause" class="btn btn-sm  mx-2">
+                            <i class="bi bi-play-fill"></i>
+                          </button>
+                          <button id="next" class="btn btn-sm ">
+                            <i class="bi bi-skip-end-fill"></i>
+                          </button>
+                          </div>
+              
+                          <div class="player-info">
+                              <span id="track-title" class="track-title"></span>  
+                              <span id="track-artist" class="track-artist"></span>
+                          </div>
+                          <div class="track-progress d-flex align-items-center larg-traccia mx-3">
+                              <small id="current-time">0:00</small>
+                              <input type="range" id="progress-bar" class="mx-2" value="0" style="flex-grow: 1;">
+                              <small id="total-duration">0:00</small>
+                          </div>
+                       
+                            </div>
+              
+                         <div class="volume-controls d-flex align-items-center pos-volume">
+                          <i class="bi bi-volume-down-fill"></i>
+                          <input type="range" id="volume-control" class="mx-2" min="0" max="1" step="0.01" value="1">
+                          <i class="bi bi-volume-up-fill"></i>
+                      </div>
+                      </div>
+                      
+              
+                   
+                    </div>
+                    
+                  </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
